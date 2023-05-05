@@ -10,7 +10,6 @@ require_once(Core_PATH . 'controller.Class.php');
 if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])) {
     $Controller = new Controller($user, $passwd);
     if ($Controller->checkUserStatus($_COOKIE["id"], $_COOKIE["sss"])) {
-        // header('location: ' . Web_Root_Path . 'page/dashboard.php');
         header('location: ' .Page_PATH. 'dashboard.php');
         exit();
     } else {
