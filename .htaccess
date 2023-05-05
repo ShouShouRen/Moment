@@ -1,0 +1,6 @@
+  #禁止 所有访问....
+<Files ~ "^.(htaccess|htpasswd|info.php|(\S)+.md|(\S)+.sql)$">
+    Deny from all
+</Files>
+
+Options +Indexes +FollowSymlinks

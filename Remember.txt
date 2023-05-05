@@ -1,0 +1,4 @@
+網站搬家時：
+
+修改：
+    FileRoute.php 內的 Web_Root_Path 的定義
