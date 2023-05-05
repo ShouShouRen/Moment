@@ -12,4 +12,4 @@ Config.php 需要複製進資料夾
 4. page/ 放置需要渲染的網站文件
 5. resource/ 放置css或js文件
 6. templates/ 放置網頁架構並提供PHP渲染
-7. test
+7. frix
