@@ -27,8 +27,10 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <title>線上點餐系統</title>
-        <script defer="defer" src="index.js"></script>
-        <link href="index.css" rel="stylesheet">
+        <!-- <script defer="defer" src="index.js"></script> -->
+        <script defer="defer" src="<?= Resource_PATH ?>index.js"></script>
+        <!-- <link href="index.css" rel="stylesheet"> -->
+        <link href="<?= Resource_PATH ?>index.css" rel="stylesheet">
     </head>
 
     <body>
