@@ -14,9 +14,4 @@ Base(function() use ($url){
         echo $twig->render('dashboard.twig',$url);
     }
 });
-
-
-Base(function() use ($url){
-    
-});
 ?>
