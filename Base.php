@@ -11,6 +11,7 @@ $URLS = array(
     //定義網站URL
     "dashboard" => $_SESSION["Route-dashboard"], 
     "customers" => $_SESSION["Route-customers"],
+    "orders" => $_SESSION["Route-orders"],
     //End
 );
 

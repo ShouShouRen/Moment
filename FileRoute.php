@@ -5,7 +5,7 @@ define('Vendor_PATH', __DIR__ . '/vendor' . '/');
 define('ROOT_PATH', dirname(__FILE__) . '/');
 define('Core_PATH', ROOT_PATH . 'core' . '/');
 define('Function_PATH', ROOT_PATH . 'functions' . '/');
-define('Base', ROOT_PATH . 'Base.php');
+define('Base', ROOT_PATH . 'Base.php'.'/');
 //Defne web Url
 define('Web_Root_Path',$_SESSION['WEB_ROOT'].'/'); //這裡之後搬家之後需要修正路徑位置
 define('Resource_PATH', Web_Root_Path.'resource' . '/');
@@ -17,7 +17,6 @@ $_SESSION["Resource_PATH"] = Resource_PATH;
 $_SESSION["Page_PATH"] = Page_PATH;
 $_SESSION["Image_PATH"] = Image_PATH;
 $_SESSION["LOGOUT"] = Logout;
-
 //Define User templates
 function outputFiles($path)
 {
