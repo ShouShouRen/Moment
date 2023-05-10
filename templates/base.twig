@@ -2,6 +2,8 @@
 <html lang="zh-Hant-TW">
 
 <head>
+    {% block head %}
+    {% endblock %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,6 +87,7 @@
             {% block main %} {% endblock %}
         </main>
         <!-- ----------- END OF MAIN ------------ -->
+        
         <div class="right">
             <div class="top">
                 <button id="menu-btn">
@@ -109,7 +112,8 @@
                 </div>
             </div>
             <!-- ----END OF TOP---- -->
-            {% block right %} {% endblock %}
+            {% block right %}
+            {% endblock %}
         </div>
     </div>
     <script src="{{ session.Resource_PATH }}test.js"></script>
