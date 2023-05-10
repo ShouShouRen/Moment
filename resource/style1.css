@@ -58,7 +58,7 @@ body{
     color: var(--color-dark);
 }
 
-.container-grid{
+.container{
     display: grid;
     width: 96%;
     margin: 0 auto;
@@ -503,7 +503,7 @@ main table tbody td{
 
 /* ======= MEDIA QUERIES ======= */
 @media screen and (max-width: 1200px){
-    .container-grid{
+    .container{
         width: 94%;
         grid-template-columns: 7rem auto 23rem;
     }
@@ -549,7 +549,7 @@ main table tbody td{
 /* ======= MEDIA QUERIES ======= */
 
 @media screen and (max-width: 768px){
-    .container-grid {
+    .container {
         width: 100%;
         grid-template-columns: 1fr;
     }
