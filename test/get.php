@@ -18,10 +18,10 @@
     $out = password_hash($send,PASSWORD_DEFAULT);
     
 
-    $sql = "INSERT INTO Guests(token) VALUES (?)";
+    $sql = "INSERT INTO Guests(token,base64) VALUES (?,?)";
     $stmt = $db->prepare($sql);
-    $stmt->execute([$out]);
+    $stmt->execute([$out,$send]);
 
     
-    header("Location: get.php?token=$out&sec=$send");
+    header("Location: index.php?token=$out");
 ?>
