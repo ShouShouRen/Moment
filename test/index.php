@@ -24,14 +24,14 @@
             $decoder_code = base64_decode($sec["base64"]);
             $arr = explode(" ",$decoder_code);
 
-            // $time = $arr[1];
-            // echo $time . "<br>";
-            // $end = date("H:$time+15:s");
-            // $time = date('Y-m-d H:i:s');
-            // $new_time = date('Y-m-d H:i:s', strtotime($time . '+15 minutes'));
-            // echo $new_time;
-            // // echo $end;
-            // if($time < $new_time){
+            $time = $arr[1];
+            echo $time . "<br>";
+            // $time = date('Y-m-d H:i:s'); // 取得目前的時間
+            $new_time = date('H:i:s', strtotime($time.'+15 minutes')); // 加上 15 分鐘
+            echo $new_time; // 顯示加上 15 分鐘後的時間，格式為 時:分:秒
+
+            // echo $end;
+            // if($time<=$end){
             //     echo('aaa');
             // }else{
             //     echo("bbb");
