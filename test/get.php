@@ -23,19 +23,23 @@
     $stmt = $db->prepare($sql);
     $stmt->execute([$out,$send]);
 
-    
-    header("Location: index.php?token=$out");
     $code = mt_rand(0,1000000);
     $_SESSION['code'] = $code;
-
 ?>
-<script src="../resource/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
 <script>
-    $.ajax({
-        method: "POST",
-        url: "index.php",
-        data: {<?= $code ?>}
-    }).done((e)=>{
-        console.log(e);
-    })
+// $.ajax({
+//     method: "POST",
+//     url: "index.php",
+//     data: { code: <?php #echo $code; ?> } // 使用 PHP 輸出動態生成的 code 值
+// }).done(function(response){
+//     window.location.href = "index.php?token=" + response;
+// });
+$(function(){
+  var form = $('<form action="index.php?token=<?=$out?>" method="POST">' +
+    '<input type="hidden" name="code" value="<?=$_SESSION['code']?>">' +
+    '</form>');
+  $('body').append(form);
+  form.submit();
+});
 </script>

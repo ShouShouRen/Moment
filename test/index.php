@@ -27,9 +27,12 @@
             $time = $arr[1];
             echo $time . "<br>";
             // $time = date('Y-m-d H:i:s'); // 取得目前的時間
-            $new_time = date('H:i:s', strtotime($time.'+15 minutes')); // 加上 15 分鐘
+            $new_time = date('H:i', strtotime($time.'+15 minutes')); // 加上 15 分鐘
             echo $new_time; // 顯示加上 15 分鐘後的時間，格式為 時:分:秒
-
+            $now = date("H:i");
+            if(($now > $new_time) && ($now < $time)){
+                die("error");
+            }
             // echo $end;
             // if($time<=$end){
             //     echo('aaa');
@@ -44,9 +47,16 @@
 
             $entryTime = date('Y-m-d H:i:s', $currentTimestamp);
             $endTime = date('Y-m-d H:i:s', $entryTimestamp);
-
-            echo "進入網站時間:$entryTime<br>";
-            echo "禁止操作時間:$endTime<br>";
+            
+            echo "進入網站時間:$entryTime"."<br>";
+            echo "禁止操作時間:$endTime"."<br>";
+            var_dump($_POST["code"]);
+            $hide = $_POST["code"];
+            if($hide == $_SESSION['code']){
+                echo "suc";
+            }else{
+                die("err");
+            }
         }
         else{
             echo "error1";
