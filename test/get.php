@@ -2,6 +2,7 @@
     require_once("../FileRoute.php");
     require_once(Core_PATH."controller.Class.php");
     require_once("../config.php");
+    session_start();
     $db = new Connect($user,$passwd);
     
     $today = date("Y-m-d H:i:s"); 
@@ -24,4 +25,17 @@
 
     
     header("Location: index.php?token=$out");
+    $code = mt_rand(0,1000000);
+    $_SESSION['code'] = $code;
+
 ?>
+<script src="../resource/jquery.min.js"></script>
+<script>
+    $.ajax({
+        method: "POST",
+        url: "index.php",
+        data: {<?= $code ?>}
+    }).done((e)=>{
+        console.log(e);
+    })
+</script>
