@@ -7,6 +7,16 @@
     
     $today = date("Y-m-d H:i:s"); 
     $desk = "A1";
+
+    $sql = "SELECT token,base64 FROM Guests WHERE token = ?";
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$data]);
+    $count = $stmt->rowCount();
+    if($count==0){
+        $sql = "ALTER TABLE `Guests` AUTO_INCREMENT = 0;";
+        $stmt = $db->prepare($sql);
+        $stmt->execute(); 
+    }
     
     $stmt = $db->prepare("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE   (TABLE_NAME = 'Guests');");
     $stmt->execute();
@@ -25,14 +35,5 @@
 
     $code = mt_rand(0,1000000);
     $_SESSION['code'] = $code;
+    header("Location: index.php?token=$out");
 ?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
-<script>
-$(function(){
-  var form = $('<form action="index.php?token=<?=$out?>" method="POST">' +
-    '<input type="hidden" name="code" value="<?=$_SESSION['code']?>">' +
-    '</form>');
-  $('body').append(form);
-  form.submit();
-});
-</script>
