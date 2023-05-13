@@ -8,11 +8,11 @@
     $today = date("Y-m-d H:i:s"); 
     $desk = "A1";
     
-    $stmt = $db->prepare('SELECT * FROM Guests');
+    $stmt = $db->prepare("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE   (TABLE_NAME = 'Guests');");
     $stmt->execute();
-    $count=$stmt->rowCount();
+    $count = $stmt->fetch(PDO::FETCH_ASSOC);
     
-    $numberID = $count + 1 ;
+    $numberID = $count['AUTO_INCREMENT'] + 1 ;
 
     $sec = $today." ".$numberID." ".$desk;
     $send = base64_encode($sec);
@@ -28,13 +28,6 @@
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"></script>
 <script>
-// $.ajax({
-//     method: "POST",
-//     url: "index.php",
-//     data: { code: <?php #echo $code; ?> } // 使用 PHP 輸出動態生成的 code 值
-// }).done(function(response){
-//     window.location.href = "index.php?token=" + response;
-// });
 $(function(){
   var form = $('<form action="index.php?token=<?=$out?>" method="POST">' +
     '<input type="hidden" name="code" value="<?=$_SESSION['code']?>">' +
