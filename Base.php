@@ -12,10 +12,9 @@ $URLS = array(
     "dashboard" => $_SESSION["Route-dashboard"], 
     "customers" => $_SESSION["Route-customers"],
     "orders" => $_SESSION["Route-orders"],
-    "qr" => $_SESSION["Route-qr"]
+    "qr" => $_SESSION["Route-qr"],
     //End
 );
-var_dump($URLS);
 
 function Base(callable $fn){
     require_once(ROOT_PATH.'config.php');
@@ -27,7 +26,7 @@ function Base(callable $fn){
             exit();
         }
         if ($Controller->checkUserStatus($_COOKIE["id"], $_COOKIE["sss"])) {
-            return $fn();
+            return $fn($user,$passwd);
         } else {
             header('location:'.Web_Root_Path."index.php");
         }
