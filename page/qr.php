@@ -15,7 +15,7 @@ Base(function($user,$passwd) use ($url){
     $count = $stmt->rowCount();
     if($count==0){
         $sql = "ALTER TABLE `Guests` AUTO_INCREMENT = 0;";
-        $stmt = $this->db->prepare($sql);
+        $stmt = $db->prepare($sql);
         $stmt->execute(); 
     }
         
