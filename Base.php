@@ -12,8 +12,10 @@ $URLS = array(
     "dashboard" => $_SESSION["Route-dashboard"], 
     "customers" => $_SESSION["Route-customers"],
     "orders" => $_SESSION["Route-orders"],
+    "qr" => $_SESSION["Route-qr"]
     //End
 );
+var_dump($URLS);
 
 function Base(callable $fn){
     require_once(ROOT_PATH.'config.php');

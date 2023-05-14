@@ -1,3 +1,5 @@
+
+
 <?php
     require_once("../FileRoute.php");
     require_once(Core_PATH."controller.Class.php");
@@ -8,9 +10,9 @@
     $today = date("Y-m-d H:i:s"); 
     $desk = "A1";
 
-    $sql = "SELECT token,base64 FROM Guests WHERE token = ?";
+    $sql = "SELECT * FROM `Guests`";
     $stmt = $db->prepare($sql);
-    $stmt->execute([$data]);
+    $stmt->execute();
     $count = $stmt->rowCount();
     if($count==0){
         $sql = "ALTER TABLE `Guests` AUTO_INCREMENT = 0;";
@@ -27,13 +29,14 @@
     $sec = $today." ".$numberID." ".$desk;
     $send = base64_encode($sec);
     $out = password_hash($send,PASSWORD_DEFAULT);
-    
-
     $sql = "INSERT INTO Guests(token,base64) VALUES (?,?)";
     $stmt = $db->prepare($sql);
     $stmt->execute([$out,$send]);
-
-    $code = mt_rand(0,1000000);
-    $_SESSION['code'] = $code;
-    header("Location: index.php?token=$out");
+    $url =  urlencode("https://moment.duacodie.com/Merge/test/index.php?token=$out");
+    echo "<img src='https://barcodeapi.org/api/qr/$url'/>";
+    // header("Location: index.php?token=$out");
 ?>
+<script language="javascript">
+	var URL = "https://moment.duacodie.com/Merge/";
+	window.location.replace(URL+"index.php?token=<?= $out;?>");
+</script>
