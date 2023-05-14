@@ -5,5 +5,18 @@ QR
 {% endblock %}
 
 {% block main %}
-    <img src="{{code}}"/>
+<div class="container d-flex justify-content-center align-items-center" style="height: 60vh;">
+    <div style="width: 55%; height: 55%;">
+    <img class="img-fluid" src="{{code}}"/>
+    </div>
+</div>
+{% endblock %}
+{% block right %}
+<div class="d-flex flex-column justify-content-center align-items-center" style="height: 60vh;">
+    <form>
+        <label for="">桌號</label>
+        <input type="text" class="form-control">
+        <input type="submit" class="btn btn-light" value="送出">
+    </form>
+</div>
 {% endblock %}
