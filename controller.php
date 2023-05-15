@@ -13,7 +13,7 @@ if(isset($_GET["code"])){
     $token = $gClient->fetchAccessTokenWithAuthCode($_GET["code"]);
 }
 else{
-    header('Location:'.ROOT_PATH."index.php");
+    header('Location:'.Web_Root_Path."index.php");
     exit();
 }
 if(isset($token["error"])!="invalid_grant"){
@@ -27,8 +27,13 @@ if(isset($token["error"])!="invalid_grant"){
         'givenName' => $userData['givenName'] 
     ); 
 
-
-    //insert data
+    if(!isset($_SESSION['userData'])){
+        header("Location: ".Web_Root_Path.'index.php');
+        exit();
+    }
+    
+    // $ret = $stmt->fetch(PDO::FETCH_ASSOC);
+    // insert data
     $Controller = new Controller($user,$passwd);
     echo $Controller->insertData(array(
         'email' => $userData['email'],

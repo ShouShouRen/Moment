@@ -46,26 +46,31 @@ class Controller{
         $checkUser->execute(['email'=> $data["email"]]);
         $info = $checkUser->fetch(PDO::FETCH_ASSOC);
         if(!isset($info["id"])){
-            $session = $this->generateCode(20);
-            $inserUser = $this->db -> prepare("INSERT INTO users (f_name,l_name,avatar,email,password,session) VALUES(:f_name,:l_name,:avatar,:email,:password,:session)");
-            $inserUser->execute([
-                ':f_name' => $data["givenName"],
-                ':l_name' => $data["familyName"],
-                ':avatar' => $data["avatar"],
-                ':email' => $data["email"],
-                ':password' => $this->generateCode(10),
-                ':session' => $session
-            ]);
-            if($inserUser){
-                setcookie("id",$this->db->lastInsertId(),time()+60*60*24*30,"/","moment.duacodie.com");
-                setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");
-                $_SESSION['id'] = $this->db->lastInsertId();
-                header('Location: index.php');
-                exit();
-            }
-            else{
-                return "Error inserting user!";
-            }
+            // $session = $this->generateCode(20);
+            // $inserUser = $this->db -> prepare("INSERT INTO users (f_name,l_name,avatar,email,password,session) VALUES(:f_name,:l_name,:avatar,:email,:password,:session)");
+            // $inserUser->execute([
+            //     ':f_name' => $data["givenName"],
+            //     ':l_name' => $data["familyName"],
+            //     ':avatar' => $data["avatar"],
+            //     ':email' => $data["email"],
+            //     ':password' => $this->generateCode(10),
+            //     ':session' => $session
+            // ]);
+            // if($inserUser){
+            //     setcookie("id",$this->db->lastInsertId(),time()+60*60*24*30,"/","moment.duacodie.com");
+            //     setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");
+            //     $_SESSION['id'] = $this->db->lastInsertId();
+            //     header('Location: index.php');
+            //     exit();
+            // }
+            // else{
+            //     return "Error inserting user!";
+            // }
+            ?>
+                <script language="javascript">
+                    window.location.replace("<?= Error_PATH ?>"+"permission_error.html");
+                </script>
+            <?php
         }
         else{
             setcookie("id",$info["id"],time()+60*60*24*30,"/","moment.duacodie.com");
