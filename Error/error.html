@@ -1,12 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>超過時間請聯繫服務員給予新的點餐連結</h1>
-</body>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Error</title>
+    <style>
+      @font-face {
+        font-family: "Weibei SC Bold";
+        src: url("./weibei-sc-bold.otf") format("opentype");
+        font-display: swap;
+      }
+
+      body {
+        font-family: "Weibei SC Bold";
+        font-size: 3.5em;
+        background-color: #202020;
+        color: #f9f9f9;
+        text-align: center;
+        word-wrap: break-word;
+      }
+      @media (max-width: 768px) {
+        p.typeme {
+          color: #f9f9f9;
+          font-family: "Weibei SC Bold";
+          overflow: hidden;
+          width: 100vw;
+          word-wrap: break-word;
+          animation: type 3s steps(60, end);
+        }
+      }
+      p.typeme {
+        color: #f9f9f9;
+        font-family: "Weibei SC Bold";
+        overflow: hidden;
+        width: 100%;
+        word-wrap: break-word;
+        animation: type 3s steps(60, end);
+      }
+
+
+      @keyframes type {
+        from {
+          width: 0;
+        }
+      }
+
+      @keyframes type2 {
+        0% {
+          width: 0;
+        }
+        40% {
+          width: 0;
+        }
+        100% {
+          width: 100;
+        }
+      }
+
+      @keyframes type3 {
+        0% {
+          width: 0;
+        }
+        45% {
+          width: 0;
+        }
+        100% {
+          width: 100;
+        }
+      }
+
+      @keyframes blink {
+        to {
+          opacity: 0;
+        }
+      }
+      .center {
+        display: grid;
+        place-items: center;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <p class="typeme">超過時間請聯繫服務員給予新的點餐連結謝謝</p>
+    </div>
+  </body>
 </html>
+<script language="javascript">
+  setTimeout("location.href='https://moment.duacodie.com/Merge/index.php'",5000);
+</script>
