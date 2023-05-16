@@ -208,25 +208,26 @@ label{
 {% block main %}
 
 <div class="container d-flex flex-column align-items-center" style="height:100vh;">
-  <p style="font-size: 2em; color:#f9f9f9; position: absolute; top:20%; left: 50%; transform: translate(-50%,-50%);">QR Code 產生器</p>
+  <p style="font-size: 2em; color:#f9f9f9; position: absolute; top:15%; left: 50%; transform: translate(-50%,-50%);">QR Code 產生器</p>
+  {% if QRcode == "true" %}
   <div class="camera">
     <div class="lens"></div>
     <div class="flashlight"></div>
   
     <img class="picture" src="{{code}}" style="width: 40vw; height: 40vh;"/>
-  
+  {% endif %}
   </div>
 </div>
 {% endblock %}
 {% block right %}
 <div class="position-relative w-100 h-100">
 <div style="position: absolute; bottom: 20%;">
-    <form class="w-100">
+    <form class="w-100" action="qr.php" method="post">
         <div class="py-1">
           <label for="" class="">桌號</label>
         </div>
         <div class="py-1">
-        <input type="text" class="form-control">
+        <input name="Desk" type="text" class="form-control">
         </div>
         <div class="py-1">
         <input type="submit" class="btn btn-light" value="送出">
