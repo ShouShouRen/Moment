@@ -1,4 +1,21 @@
-網站搬家時：
+網站資源路由:
+    1. Vendor_PATH 指向vendor的資料夾
+    2. ROOT_PATH 指向當前網頁的主目錄
+    3. Core_PATH 指向core資料夾
+    4. Base 指向Base.php
+    5. Web_ROOT_Path 指向網站根目錄
+    6. Error_PATH   指向Error資料夾
+    7. Resource_PATH 指向resource資料夾
+    8. Page_PATH 指向page資料夾
+    9. Image_PATH 指向images資料夾
+    10. Template_PATH 指向templates資料夾
+    11. Logout 指向logout.php
+    
+    
 
+網站搬家時：
 修改：
     FileRoute.php 內的 Web_Root_Path 的定義
+
+加入新的頁面步驟：
+    1. 

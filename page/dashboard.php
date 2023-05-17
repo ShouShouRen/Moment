@@ -1,6 +1,6 @@
 <?php
-require_once('../FileRoute.php');
-require_once(Base);
+session_start();
+require_once($_SESSION["Base"]);
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 session_start();

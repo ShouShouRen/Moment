@@ -1,12 +1,11 @@
 <?php
-require_once('FileRoute.php');
-require_once(Vendor_PATH.'autoload.php');
-
 session_start();
+require_once($_SESSION["Vendor_PATH"].'autoload.php');
+
 $URLS = array(
     "avatar" => $_SESSION["userData"]["avatar"],
     "givenName" => $_SESSION['userData']['givenName'],
-    "logout" => Logout,
+    "logout" => $_SESSION["LOGOUT"],
     "session" => $_SESSION,
     //定義網站URL
     "dashboard" => $_SESSION["Route-dashboard"], 
@@ -17,8 +16,8 @@ $URLS = array(
 );
 
 function Base(callable $fn){
-    require_once(ROOT_PATH.'config.php');
-    require_once(Core_PATH.'controller.Class.php');
+    require_once($_SESSION["Config"]);
+    require_once($_SESSION["Core_PATH"].'controller.Class.php');
     if (isset($_SESSION['ucode'])) {
         $Controller = new Controller($user, $passwd);
         if($_COOKIE['id']!=$_SESSION['id']){

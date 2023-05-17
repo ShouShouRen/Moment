@@ -1,9 +1,10 @@
 <?php
 require_once('FileRoute.php');
-require_once(Core_PATH.'controller.Class.php');
-require_once(ROOT_PATH.'config.php');
-// require_once('SessionMG.php');
 session_start();
+require_once($_SESSION["Core_PATH"].'controller.Class.php');
+require_once($_SESSION["Config"]);
+// require_once('SessionMG.php');
+
 //Start Debug Message
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
