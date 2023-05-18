@@ -30,7 +30,7 @@ Base(function($user,$passwd) use ($url){
         $sql = "INSERT INTO Guests(token,base64) VALUES (?,?)";
         $stmt = $db->prepare($sql);
         $stmt->execute([$out,$send]);
-        $code =  urlencode("https://moment.duacodie.com/Merge/test/index.php?token=$out");
+        $code =  urlencode($_SESSION['WEB_ROOT_URL'].$_SESSION['WEB_ROOT']."/index.php?token=$out");
         $url["code"] = "https://barcodeapi.org/api/qr/$code";
         $url["QRcode"] = "true";
     }

@@ -1,7 +1,5 @@
 <?php
-$code = "MjAyMy0wNS0xNiAwODo0MDowMSA0IEEz";
-
-var_dump(base64_decode($code));
-
-
+session_start();
+echo Web_Root_Path;
+// ."index.php?token=$out"
 ?>

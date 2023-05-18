@@ -4,6 +4,10 @@ $q = explode('/', $_SERVER['PHP_SELF']);
 array_pop($q);
 $q = implode("/", $q);
 $_SESSION['WEB_ROOT'] = $q;
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') $link = "https";
+else $link = "http";
+$link .= "://".$_SERVER['SERVER_NAME'];
+$_SESSION['WEB_ROOT_URL'] = ($link);
 require_once('FileRoute.php');
 require_once(ROOT_PATH . 'config.php');
 require_once(Core_PATH . 'controller.Class.php');
@@ -51,7 +55,8 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                 $sql = "DELETE FROM `Guests` WHERE token = ?";
                 $stmt = $db->prepare($sql);
                 $stmt->execute([$data]);
-                die("error2");
+                header("Location: index.php");
+                die();
             }
             ?>
 <!doctype html>
