@@ -234,21 +234,35 @@ label{
   </div>
 </div>
 #}
-<div class="container d-flex flex-column" style="height:100vh;">
-  <h3 class="h3" style="padding-top: 2.3rem;">桌號:</h3>
-  <div class="row g-3">
-    <div class="col-lg-3 col-md-6">
-      <button class="btn btn-light w-100">A1<button>
+<from method="post" action="qr.php">
+  <div class="container d-flex flex-column" style="height:100vh;">
+    <h3 class="h3" style="padding-top: 2.3rem;">桌號:</h3>
+    <div class="row g-3">
+      <div class="col-lg-3 col-md-6">
+        <input class="btn btn-light w-100" type="button" name="Desk" value="A1">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <input class="btn btn-light w-100" type="button" name="Desk" value="A2">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <input class="btn btn-light w-100" type="button" name="Desk" value="A3">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <input class="btn btn-light w-100" type="button" name="Desk" value="A4">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <input class="btn btn-light w-100" type="button" name="Desk" value="A5">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <input class="btn btn-light w-100" type="button" name="Desk" value="A6">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <input class="btn btn-light w-100" type="button" name="Desk" value="A7">
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <input class="btn btn-light w-100" type="button" name="Desk" value="A8">
+      </div>
     </div>
-    <div class="col-lg-3 col-md-6">
-      <button class="btn btn-light w-100">A2<button>
-    </div>
-    <div class="col-lg-3 col-md-6">
-      <button class="btn btn-light w-100">A3<button>
-    </div>
-    <div class="col-lg-3 col-md-6">
-      <button class="btn btn-light w-100">A4<button>
-    </div>
-  </div>
-<div>
+  <div>
+</from>
 {% endblock %}
