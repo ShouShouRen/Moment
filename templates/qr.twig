@@ -5,7 +5,6 @@ QR
 {% endblock %}
 {% block head %}
     <style>
-        
 .camera{
   height: 500px;
   width: 500px;
@@ -206,32 +205,50 @@ label{
     </style>
 {% endblock %}
 {% block main %}
-
 <div class="container d-flex flex-column align-items-center" style="height:100vh;">
   <p style="font-size: 2em; color:#f9f9f9; position: absolute; top:15%; left: 50%; transform: translate(-50%,-50%);">QR Code 產生器</p>
   {% if QRcode == "true" %}
   <div class="camera">
     <div class="lens"></div>
-    <div class="flashlight"></div> 
+    <div class="flashlight"></div>
     <img class="picture" src="{{code}}" style="width: 40vw; height: 40vh;"/>
   </div>
   {% endif %}
 </div>
 {% endblock %}
 {% block right %}
+{# 
 <div class="position-relative w-100 h-100">
-<div style="position: absolute; bottom: 20%;">
-    <form class="w-100" action="qr.php" method="post">
-        <div class="py-1">
-          <label for="" class="">桌號</label>
-        </div>
-        <div class="py-1">
-        <input name="Desk" type="text" class="form-control">
-        </div>
-        <div class="py-1">
-        <input type="submit" class="btn btn-light" value="送出">
-        </div>
-    </form>
+  <div style="position: absolute; top: 20%;">
+      <form class="w-100" action="qr.php" method="post">
+          <div class="py-1">
+            <label for="" class="">桌號</label>
+          </div>
+          <div class="py-1">
+          <input name="Desk" type="text" class="form-control">
+          </div>
+          <div class="py-1">
+          <input type="submit" class="btn btn-light w-100" value="送出">
+          </div>
+      </form>
+  </div>
 </div>
-</div>
+#}
+<div class="container d-flex flex-column" style="height:100vh;">
+  <h3 class="h3" style="padding-top: 2.3rem;">桌號:</h3>
+  <div class="row g-3">
+    <div class="col-lg-3 col-md-6">
+      <button class="btn btn-light w-100">A1<button>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <button class="btn btn-light w-100">A2<button>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <button class="btn btn-light w-100">A3<button>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <button class="btn btn-light w-100">A4<button>
+    </div>
+  </div>
+<div>
 {% endblock %}
