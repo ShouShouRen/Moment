@@ -41,6 +41,7 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
+    overflow-y: hidden;
 }
 
 html{
