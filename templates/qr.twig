@@ -1,268 +1,397 @@
 {% extends 'base.twig' %}
 
 {% block title %}
-QR
+	QR
 {% endblock %}
 {% block head %}
-    <style>
-.camera{
-  height: 500px;
-  width: 500px;
-  border: 10px solid #fff;
-  border-radius:50px;
-  
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%, -50%);
-  
-  animation: 
-    ballup 0.5s 1s both,
-    balldown 0.2s 1.5s ease-in forwards,
-    camerain 0.3s 1.7s forwards;
-   
-    perspective: 500px;
-}
+	<style>
+		.qr {
+			font-size: 2em;
+			position: absolute;
+			top: 15%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			margin-bottom: 68px;
+			padding-bottom: 68px;
+		}
+		.btn {
+			line-height: 3;
+		}
+		.camera {
+			height: 250px;
+			width: 250px;
+			border: 10px solid #fff;
+			border-radius: 50px;
 
-@keyframes ballup{
-  0%{
-    top: 50%;
-    width: 5px;
-    height: 5px;
-    opacity: 0;
-  }
-  10%{
-    opacity: 1;
-  }
-  100%{
-    top: 10%;
-    width: 5px;
-    height: 5px;
-  }
-}
-@keyframes balldown{
-  0%{
-    top: 10%;
-  }
-  100%{
-    top: 50%;
-  } 
-}
-@keyframes camerain{
-  0%{
-    width: 5px;
-    height: 5px;
-  }
-  80%{
-    width: 250px;
-    height: 250px;
-  }
-  100%{
-    width: 200px;
-    height: 200px;
-  }
-}
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 
-.lens{
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform: translate(-50%, -50%);
-  
-  animation: lensin 0.3s 1.8s backwards;
-}
+			animation: ballup 0.5s 1s both, balldown 0.2s 1.5s ease-in forwards, camerain 0.3s 1.7s forwards;
 
-@keyframes lensin{
-  0%{
-    width: 0;
-    height: 0;
-    opacity: 0;
-  }
-  10%{
-    opacity: 1;
-  }
-  80%{
-    width: 120px;
-    height: 120px;
-  }
-  100%{
-    width: 100px;
-    height: 100px;
-  }
-}
+			perspective: 500px;
+		}
+
+		@keyframes ballup {
+			0% {
+				top: 50%;
+				width: 5px;
+				height: 5px;
+				opacity: 0;
+			}
+			10% {
+				opacity: 1;
+			}
+			100% {
+				top: 10%;
+				width: 5px;
+				height: 5px;
+			}
+		}
+		@keyframes balldown {
+			0% {
+				top: 10%;
+			}
+			100% {
+				top: 50%;
+			}
+		}
+		@keyframes camerain {
+			0% {
+				width: 5px;
+				height: 5px;
+			}
+			80% {
+				width: 250px;
+				height: 250px;
+			}
+			100% {
+				width: 200px;
+				height: 200px;
+			}
+		}
+
+		.lens {
+			height: 100px;
+			width: 100px;
+			border: 15px solid #fff;
+			border-radius: 50%;
+
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			animation: lensin 0.3s 1.8s backwards;
+		}
+
+		@keyframes lensin {
+			0% {
+				width: 0;
+				height: 0;
+				opacity: 0;
+			}
+			10% {
+				opacity: 1;
+			}
+			80% {
+				width: 120px;
+				height: 120px;
+			}
+			100% {
+				width: 100px;
+				height: 100px;
+			}
+		}
 
 
-.flashlight{
-  height: 20px;
-  width: 20px;
-  background-color: #fff;
-  border-radius: 50%;
-  
-  position: absolute;
-  top:20px;
-  right:20px;
-  
-  animation: flashlightin 0.3s 2.2s backwards;
-}
+		.flashlight {
+			height: 20px;
+			width: 20px;
+			background-color: #fff;
+			border-radius: 50%;
 
-@keyframes flashlightin{
-  0%{
-    transform: scale(0);
-  }
-  80%{
-    transform:scale(1.2);
-  }
-  100%{
-    transform:scale(1);
-  }
-}
+			position: absolute;
+			top: 20px;
+			right: 20px;
 
-.flashlight:after{
-  content:"";
-  width: 200px;
-  height: 200px;
-  border-radius:50%;
-  background-color: rgba(256,256,256,0.5);
-  
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  
-  animation: flash 0.3s 3s both;
-}
+			animation: flashlightin 0.3s 2.2s backwards;
+		}
 
-@keyframes flash{
-  0%{
-    opacity: 0;
-  }
-  25%{
-    opacity: 1;
-  }
-  50%{
-    opacity: 0;
-  }
-  75%{
-    opacity: 1;
-  }
-  100%{
-    opacity: 0;
-  }
+		@keyframes flashlightin {
+			0% {
+				transform: scale(0);
+			}
+			80% {
+				transform: scale(1.2);
+			}
+			100% {
+				transform: scale(1);
+			}
+		}
 
-}
-.picture{
-  height: 500px;
-  width: 500px;
-  background-color: #ccc;
-  
-  position: absolute;
-  top:50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  
-  animation: 
-    picturein 1s 3.5s backwards,
-    pictureflip 1s 4.5s forwards;
-}
+		.flashlight:after {
+			content: "";
+			width: 200px;
+			height: 200px;
+			border-radius: 50%;
+			background-color: rgba(256, 256, 256, 0.5);
 
-@keyframes picturein{
-  0%{
-    height: 0;
-    width: 120px;
-    top: 100%;
-    transform: translate(-50%,0);
-    opacity: 0;
-  }
-  100%{
-    height: 120px;
-    width: 120px;
-    top: 100%;
-    transform:translate(-50%,0);
-  }
-}
-@keyframes pictureflip{
-  0%{
-    height: 120px;
-    width: 120px;
-    top: 100%;
-    transform:translate(-50%, 0) rotateX(0deg);
-  }
-  100%{
-    height: 500px;
-    width: 500px;
-    top: 50%;
-    transform:translate(-50%,-50%) rotateX(360deg);
-    
-  }
-}
-label{
-  font-size: 30px;
-}
-    </style>
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			animation: flash 0.3s 3s both;
+		}
+
+		@keyframes flash {
+			0% {
+				opacity: 0;
+			}
+			25% {
+				opacity: 1;
+			}
+			50% {
+				opacity: 0;
+			}
+			75% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+			}
+
+		}
+
+		.picture {
+			width: 250px;
+			height: 250px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			animation: picturein 1s 3.5s backwards, pictureflip 1s 4.5s forwards;
+		}
+
+		@keyframes picturein {
+			0% {
+				height: 0;
+				width: 120px;
+				top: 100%;
+				transform: translate(-50%, 0);
+				opacity: 0;
+			}
+			100% {
+				height: 120px;
+				width: 120px;
+				top: 100%;
+				transform: translate(-50%, 0);
+				perspective: 500px;
+
+			}
+		}
+		@keyframes pictureflip {
+			0% {
+				height: 120px;
+				width: 120px;
+				top: 100%;
+				transform: translate(-50%, 0) rotateX(0deg);
+			}
+			100% {
+				height: 500px;
+				width: 500px;
+				top: 50%;
+				transform: translate(-50%, -50%) rotateX(360deg);
+				perspective: 600px;
+			}
+		}
+		@media(max-width: 768px) {
+			@keyframes pictureflip {
+				0% {
+					height: 120px;
+					width: 120px;
+					top: 100%;
+					transform: translate(-50%, 0) rotateX(0deg);
+				}
+				100% {
+					height: 420px;
+					width: 420px;
+					top: 50%;
+					transform: translate(-50%, -50%) rotateX(360deg);
+					perspective: 600px;
+				}
+			}
+		}
+		@media(max-width: 480px) {
+			@keyframes pictureflip {
+				0% {
+					height: 120px;
+					width: 120px;
+					top: 100%;
+					transform: translate(-50%, 0) rotateX(0deg);
+				}
+				100% {
+					height: 380px;
+					width: 380px;
+					top: 50%;
+					transform: translate(-50%, -50%) rotateX(360deg);
+					perspective: 600px;
+				}
+			}
+		}
+		.vhrwd {
+			height: 100vh;
+		}
+		@media(max-width: 576px) {
+			.vhrwd {
+				height: 70vh;
+			}
+		}
+		@media(max-height: 576px) {
+			.camera {
+				top: 200px;
+			}
+			main .qr {
+				position: absolute;
+				top: 80px;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+			.right .top .theme-toggler {
+				width: 4.4rem;
+				position: absolute;
+				right: 10%;
+			}
+			@keyframes pictureflip {
+				0% {
+					height: 120px;
+					width: 120px;
+					top: 100%;
+					transform: translate(-50%, 0) rotateX(0deg);
+				}
+				100% {
+					height: 280px;
+					width: 280px;
+					top: 50%;
+					transform: translate(-50%, -50%) rotateX(360deg);
+					perspective: 600px;
+				}
+			}
+		}
+	</style>
 {% endblock %}
 {% block main %}
-<div class="container d-flex flex-column align-items-center" style="height:100vh;">
-  <p style="font-size: 2em; color:#f9f9f9; position: absolute; top:15%; left: 50%; transform: translate(-50%,-50%);">QR Code 產生器</p>
-  {% if QRcode == "true" %}
-  <div class="camera">
-    <div class="lens"></div>
-    <div class="flashlight"></div>
-    <img class="picture" src="{{code}}" style="width: 40vw; height: 40vh;"/>
-  </div>
-  {% endif %}
-</div>
+	<div class="container d-flex flex-column align-items-center position-relative vhrwd">
+		<h3 class="h3 qr">QR Code 產生器</h3>
+		{% if QRcode == "true" %}
+			<div class="camera">
+				<div class="lens"></div>
+				<div class="flashlight"></div>
+				<img class="picture" src="{{code}}"/>
+			</div>
+
+		{% endif %}
+		{# <div class="camera">
+								      <div class="lens"></div>
+								      <div class="flashlight"></div>
+								      <img class="picture"src="https://barcodeapi.org/api/qr/%22https%3a%2f%2fmoment.duacodie.com%2fMerge%2ftest%2findex.php%3ftoken%3d%242y%2410%24mdE80z9jWujhiKeKAhH2uuxJLtXFxkLkPIaILUEthprTEbt3LJ5p2" alt="">
+								    </div> #}
+	</div>
 {% endblock %}
 {% block right %}
-{# 
-<div class="position-relative w-100 h-100">
-  <div style="position: absolute; top: 20%;">
-      <form class="w-100" action="qr.php" method="post">
-          <div class="py-1">
-            <label for="" class="">桌號</label>
-          </div>
-          <div class="py-1">
-          <input name="Desk" type="text" class="form-control">
-          </div>
-          <div class="py-1">
-          <input type="submit" class="btn btn-light w-100" value="送出">
-          </div>
-      </form>
-  </div>
-</div>
-#}
-<from method="post" action="qr.php">
-  <div class="container d-flex flex-column" style="height:100vh;">
-    <h3 class="h3" style="padding-top: 2.3rem;">桌號:</h3>
-    <div class="row g-3">
-      <div class="col-lg-3 col-md-6">
-        <input class="btn btn-light w-100" type="button" name="Desk" value="A1">
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <input class="btn btn-light w-100" type="button" name="Desk" value="A2">
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <input class="btn btn-light w-100" type="button" name="Desk" value="A3">
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <input class="btn btn-light w-100" type="button" name="Desk" value="A4">
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <input class="btn btn-light w-100" type="button" name="Desk" value="A5">
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <input class="btn btn-light w-100" type="button" name="Desk" value="A6">
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <input class="btn btn-light w-100" type="button" name="Desk" value="A7">
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <input class="btn btn-light w-100" type="button" name="Desk" value="A8">
-      </div>
-    </div>
-  <div>
-</from>
+	{# 
+				<div class="position-relative w-100 h-100">
+				  <div style="position: absolute; top: 20%;">
+				      <form class="w-100" action="qr.php" method="post">
+				          <div class="py-1">
+				            <label for="" class="">桌號</label>
+				          </div>
+				          <div class="py-1">
+				          <input name="Desk" type="text" class="form-control">
+				          </div>
+				          <div class="py-1">
+				          <input type="submit" class="btn btn-light w-100" value="送出">
+				          </div>
+				      </form>
+				  </div>
+				</div>
+				#}
+	<form method="post" action="qr.php">
+		<div class="container d-flex flex-column">
+			<h3 class="h3" style="padding-top: 2.3rem;">桌號:</h3>
+			<div class="row g-3">
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A1">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A2">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A3">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A4">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A5">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A6">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A7">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A8">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A9">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A10">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A11">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A12">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A13">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-warning w-100" type="submit" name="Desk" value="A14">
+				</div>
+			</div>
+			<div class="row g-3 pt-2">
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-success w-100" type="submit" name="Desk" value="B1">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-success w-100" type="submit" name="Desk" value="B2">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-success w-100" type="submit" name="Desk" value="B3">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-success w-100" type="submit" name="Desk" value="B4">
+				</div>
+			</div>
+			<div class="row g-3 pt-2">
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-info w-100" type="submit" name="Desk" value="C1">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-info w-100" type="submit" name="Desk" value="C2">
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<input class="btn btn-info w-100" type="submit" name="Desk" value="C3">
+				</div>
+			</div>
+		</div>
+
+	</form>
 {% endblock %}
