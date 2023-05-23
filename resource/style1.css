@@ -41,7 +41,6 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    overflow-y: hidden;
 }
 
 html{
@@ -156,7 +155,7 @@ aside .sidebar{
     display: flex;
     flex-direction: column;
     height: 86vh;
-    position: relative;
+    /* position: relative; */
     top: 3rem;
 }
 
@@ -548,7 +547,7 @@ main table tbody td{
 
 /* ======= MEDIA QUERIES ======= */
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 992px){
     .container-grid {
         width: 100%;
         grid-template-columns: 1fr;
@@ -626,7 +625,7 @@ main table tbody td{
     .right .top .theme-toggler{
         width: 4.4rem;
         position: absolute;
-        left:66%;
+        right: 15%;
     }
     .right .profile .info {
         display: none;
