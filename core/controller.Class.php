@@ -119,7 +119,7 @@ class Controller{
 
     function deleteData($data){
         try{
-            $checkUser = $this->db->prepare("SELECT email FROM users WHERE email=:email");
+            $checkUser = $this->db->prepare("DELETE FROM users WHERE email=:email");
             $checkUser->execute(['email'=> $data]);
         }
         catch (PDOException $e) {
