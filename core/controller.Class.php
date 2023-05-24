@@ -44,16 +44,18 @@ class Controller{
         $user = $this->db->prepare("SELECT * FROM users ORDER BY id");
         $user->execute();
         $content = '
-            <table class="table">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Avatar</th>
-                        <th scope="col">Email</th>
-                    </tr>
-                </thead>
-                <tbody>    
+            <form method="post" action="people.php">
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Avatar</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">移除</th>
+                        </tr>
+                    </thead>
+                    <tbody>    
         ';
         while($userInfo = $user->fetch(PDO::FETCH_ASSOC)){
             $content .= '
@@ -62,10 +64,11 @@ class Controller{
                     <td>'.$userInfo["l_name"].'</td>
                     <td><img style="max-width: 50px;" src="'.$userInfo["avatar"].'" alt="avatar"></td>
                     <td>'.$userInfo["email"].'</td>
+                    <td><input type="submit" value="移除" ></td>
                 </tr>
             ';
         }
-        $content .= '</tbody></table>';
+        $content .= '</tbody></table></form>';
         return $content;
     }
     //Init data
