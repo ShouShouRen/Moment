@@ -1,3 +1,6 @@
 .user_tab{
     color: var(--color-dark-variant);
 }
+.table{
+    margin-top: 1.8rem;
+}
