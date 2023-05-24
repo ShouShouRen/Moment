@@ -57,7 +57,7 @@ class Controller{
         ';
         while($userInfo = $user->fetch(PDO::FETCH_ASSOC)){
             $content .= '
-                <tr>
+                <tr class="user_tab">
                     <td>'.$userInfo["f_name"].'</td>
                     <td>'.$userInfo["l_name"].'</td>
                     <td><img style="max-width: 50px;" src="'.$userInfo["avatar"].'" alt="avatar"></td>

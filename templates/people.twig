@@ -1,5 +1,21 @@
 {% extends 'base.twig' %}
-
+{% block head %}
+  <link rel="stylesheet" href="{{ session.Resource_PATH }}people.css">
+  <style>
+    .container-grid{
+        display: grid;
+        width: 96%;
+        margin: 0 auto;
+        gap: 1.8rem;
+        grid-template-columns: 14rem auto 0rem;
+    }
+    .right{
+      margin-top: 1.4rem;
+      position: absolute;
+      right: 5px;
+    }
+  </style>
+{% endblock %}
 {% block title %}
 管理帳號
 {% endblock %}
