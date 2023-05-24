@@ -44,7 +44,6 @@ class Controller{
         $user = $this->db->prepare("SELECT * FROM users ORDER BY id");
         $user->execute();
         $content = '
-            <form method="post" action="people.php">
                 <table class="table">
                     <thead class="table-dark">
                         <tr>
@@ -64,11 +63,17 @@ class Controller{
                     <td>'.$userInfo["l_name"].'</td>
                     <td><img style="max-width: 50px;" src="'.$userInfo["avatar"].'" alt="avatar"></td>
                     <td>'.$userInfo["email"].'</td>
-                    <td><input class="btn" type="submit" value="移除" ></td>
+                    
+                    <td>
+                        <form method="post" action="people.php">
+                            <input type="hidden" name="user_remove" value="'.$userInfo["email"].'">
+                            <input class="btn btn-danger" type="submit" name="submit" value="移除" >
+                        </form>
+                    </td>
                 </tr>
             ';
         }
-        $content .= '</tbody></table></form>';
+        $content .= '</tbody></table>';
         return $content;
     }
     //Init data
@@ -110,6 +115,17 @@ class Controller{
             header('Location: index.php');
             exit();
         }
+    }
+
+    function deleteData($data){
+        try{
+            $checkUser = $this->db->prepare("SELECT email FROM users WHERE email=:email");
+            $checkUser->execute(['email'=> $data]);
+        }
+        catch (PDOException $e) {
+           return $e;
+        }
+        return true;
     }
 }
 
