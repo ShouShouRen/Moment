@@ -64,7 +64,7 @@ class Controller{
                     <td>'.$userInfo["l_name"].'</td>
                     <td><img style="max-width: 50px;" src="'.$userInfo["avatar"].'" alt="avatar"></td>
                     <td>'.$userInfo["email"].'</td>
-                    <td><input type="submit" value="移除" ></td>
+                    <td><input class="btn" type="submit" value="移除" ></td>
                 </tr>
             ';
         }
