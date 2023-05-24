@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(!isset($_SESSION["Base"])){
+    header('location:'.Web_Root_Path."index.php");
+    die();
+}
 require_once($_SESSION["Base"]);
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
