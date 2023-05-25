@@ -77,7 +77,7 @@ class Controller{
             <td colspan="4">
                 <form method="post" action="people.php">
                     
-                    <input type="email" name="user_add">
+                    <input type="email" name="user_add" class="form-control">
                     <td>
                         <input class="btn btn-danger" type="submit" name="submit" value="添加" placeholder="輸入管理員email">
                     </td>
@@ -88,31 +88,11 @@ class Controller{
         return $content;
     }
     //Init data
-    function insertData($data){
+    function LoginPremission($data){
         $checkUser = $this->db->prepare("SELECT * FROM users WHERE email=:email");
         $checkUser->execute(['email'=> $data["email"]]);
         $info = $checkUser->fetch(PDO::FETCH_ASSOC);
         if(!isset($info["id"])){
-            // $session = $this->generateCode(20);
-            // $inserUser = $this->db -> prepare("INSERT INTO users (f_name,l_name,avatar,email,password,session) VALUES(:f_name,:l_name,:avatar,:email,:password,:session)");
-            // $inserUser->execute([
-            //     ':f_name' => $data["givenName"],
-            //     ':l_name' => $data["familyName"],
-            //     ':avatar' => $data["avatar"],
-            //     ':email' => $data["email"],
-            //     ':password' => $this->generateCode(10),
-            //     ':session' => $session
-            // ]);
-            // if($inserUser){
-            //     setcookie("id",$this->db->lastInsertId(),time()+60*60*24*30,"/","moment.duacodie.com");
-            //     setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");
-            //     $_SESSION['id'] = $this->db->lastInsertId();
-            //     header('Location: index.php');
-            //     exit();
-            // }
-            // else{
-            //     return "Error inserting user!";
-            // }
             ?>
                 <script language="javascript">
                     window.location.replace("<?= Error_PATH ?>"+"permission_error.html");
@@ -125,6 +105,38 @@ class Controller{
             $_SESSION['id'] = $info["id"];
             header('Location: index.php');
             exit();
+        }
+    }
+
+    function insertData($data){
+        $checkUser = $this->db->prepare("SELECT * FROM users WHERE email=:email");
+        $checkUser->execute(['email'=> $data]);
+        $info = $checkUser->fetch(PDO::FETCH_ASSOC);
+        if(isset($info["email"]) && $info["email"] == $data){
+            // header('Location: index.php');
+            var_dump($info["email"]);
+        }
+        else{
+            $session = $this->generateCode(20);
+            $inserUser = $this->db -> prepare("INSERT INTO users (f_name,l_name,avatar,email,password,session) VALUES(:f_name,:l_name,:avatar,:email,:password,:session)");
+            $inserUser->execute([
+                ':f_name' => "",
+                ':l_name' => "",
+                ':avatar' => "",
+                ':email' => $data,
+                ':password' => $this->generateCode(10),
+                ':session' => $session
+            ]);
+            if($inserUser){
+                setcookie("id",$this->db->lastInsertId(),time()+60*60*24*30,"/","moment.duacodie.com");
+                setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");
+                $_SESSION['id'] = $this->db->lastInsertId();
+                header('Location: index.php');
+                exit();
+            }
+            else{
+                return "Error inserting user!";
+            }
         }
     }
 
