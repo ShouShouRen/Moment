@@ -143,10 +143,15 @@ class Controller{
         $checkUser = $this->db->prepare("SELECT * FROM users WHERE email=:email");
         $checkUser->execute(['email'=> $data["email"]]);
         $info = $checkUser->fetch(PDO::FETCH_ASSOC);
-        if(isset($info["email"]) && $info["email"] == $data){
+        if(isset($info["email"]) && $info["email"] == $data["email"]){
             $session = $this->generateCode(20);
-            $inserUser = $this->db -> prepare("UPDATE users SET f_name=?,l_name=?,avatar=? WHERE email=?");
-            $inserUser->execute([$data["familyName"],$data["givenName"],$data["avatar"],$data["email"]]);
+            $inserUser = $this->db -> prepare("UPDATE users SET f_name=':f_name',l_name=':l_name',avatar=':avatar' WHERE email=':email'");
+            $inserUser->execute([
+                ':f_name' => $data["familyName"],
+                ':l_name' => $data["givenName"],
+                ':avatar' => $data["avatar"],
+                ':email' => $data["email"],
+            ]);
             if($inserUser){
                 setcookie("id",$this->db->lastInsertId(),time()+60*60*24*30,"/","moment.duacodie.com");
                 setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");

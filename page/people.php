@@ -11,7 +11,7 @@ use Twig\Loader\FilesystemLoader;
 $url = $URLS;
 Base(function($user,$passwd) use ($url){
     $controller = new Controller($user,$passwd);
-    if(isset($_POST["user_remove"])){
+    if(isset($_POST["user_remove"])&&($_SESSION['userData']['email'] != $_POST["user_remove"])){
         $result = $controller->deleteData($_POST["user_remove"]);
         if(!$result){
             die($result);
