@@ -154,8 +154,6 @@ class Controller{
                 setcookie("id",$this->db->lastInsertId(),time()+60*60*24*30,"/","moment.duacodie.com");
                 setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");
                 $_SESSION['id'] = $this->db->lastInsertId();
-                header('Location: /Merge/page/people.php');
-                exit();
             }
             else{
                 return "Error Update user!";
