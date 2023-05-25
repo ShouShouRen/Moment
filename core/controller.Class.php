@@ -104,7 +104,6 @@ class Controller{
             setcookie("sss",$info["session"],time()+60*60*24*30,"/","moment.duacodie.com");
             $_SESSION['id'] = $info["id"];
             header('Location: index.php');
-            exit();
         }
     }
 
@@ -131,7 +130,6 @@ class Controller{
                 setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");
                 $_SESSION['id'] = $this->db->lastInsertId();
                 header('Location: /Merge/page/people.php');
-                exit();
             }
             else{
                 return "Error inserting user!";
