@@ -51,7 +51,7 @@ class Controller{
                             <th scope="col">Last Name</th>
                             <th scope="col">Avatar</th>
                             <th scope="col">Email</th>
-                            <th scope="col">移除</th>
+                            <th scope="col">功能</th>
                         </tr>
                     </thead>
                     <tbody>    
@@ -73,7 +73,18 @@ class Controller{
                 </tr>
             ';
         }
-        $content .= '</tbody></table>';
+        $content .= '
+            <td colspan="4">
+                <form method="post" action="people.php">
+                    
+                    <input type="email" name="user_add">
+                    <td>
+                        <input class="btn btn-danger" type="submit" name="submit" value="添加" placeholder="輸入管理員email">
+                    </td>
+                </form> 
+            </td>
+            </tbody></table>
+            ';
         return $content;
     }
     //Init data
