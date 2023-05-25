@@ -113,8 +113,7 @@ class Controller{
         $checkUser->execute(['email'=> $data]);
         $info = $checkUser->fetch(PDO::FETCH_ASSOC);
         if(isset($info["email"]) && $info["email"] == $data){
-            // header('Location: index.php');
-            var_dump($info["email"]);
+            header('Location: index.php');
         }
         else{
             $session = $this->generateCode(20);

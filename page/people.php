@@ -18,7 +18,6 @@ Base(function($user,$passwd) use ($url){
         }
     }
     if(isset($_POST["user_add"])){
-        var_dump($_POST["user_add"]);
         $result = $controller->insertData($_POST["user_add"]);
     }
     $url['user_table'] = $controller->printData(); 
