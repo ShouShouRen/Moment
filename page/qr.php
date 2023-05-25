@@ -1,5 +1,6 @@
 <?php
 session_start();
+require("../FileRoute.php");
 if(!isset($_SESSION["Base"])){
     header('location:'.Web_Root_Path."index.php");
     die();
