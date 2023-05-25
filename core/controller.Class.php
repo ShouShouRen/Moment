@@ -46,12 +46,12 @@ class Controller{
         $content = '
                 <table class="table">
                     <thead class="table-dark">
-                        <tr>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Avatar</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">功能</th>
+                        <tr align="center" >
+                            <th scope="col" align="center" >First Name</th>
+                            <th scope="col" align="center" >Last Name</th>
+                            <th scope="col" align="center" >Avatar</th>
+                            <th scope="col" align="center" >Email</th>
+                            <th scope="col" align="center" >功能</th>
                         </tr>
                     </thead>
                     <tbody>    
@@ -59,12 +59,11 @@ class Controller{
         while($userInfo = $user->fetch(PDO::FETCH_ASSOC)){
             $content .= '
                 <tr class="user_tab">
-                    <td>'.$userInfo["f_name"].'</td>
-                    <td>'.$userInfo["l_name"].'</td>
-                    <td><img style="max-width: 50px;" src="'.$userInfo["avatar"].'" alt="avatar"></td>
-                    <td>'.$userInfo["email"].'</td>
-                    
-                    <td>
+                    <td align="center" >'.$userInfo["f_name"].'</td>
+                    <td align="center" >'.$userInfo["l_name"].'</td>
+                    <td align="center"><img style="max-width: 50px;display:block; margin:auto;" src="'.$userInfo["avatar"].'" alt="avatar"></td>
+                    <td align="center" >'.$userInfo["email"].'</td>
+                    <td align="center" >
                         <form method="post" action="people.php">
                             <input type="hidden" name="user_remove" value="'.$userInfo["email"].'">
                             <input class="btn btn-danger" type="submit" name="submit" value="移除" >
@@ -74,11 +73,13 @@ class Controller{
             ';
         }
         $content .= '
-            <td colspan="4">
+            <td></td>
+            <td></td> 
+            <td></td>
+            <td align="center" >
                 <form method="post" action="people.php">
-                    
                     <input type="email" name="user_add" class="form-control">
-                    <td>
+                    <td align="center" >
                         <input class="btn btn-danger" type="submit" name="submit" value="添加" placeholder="輸入管理員email">
                     </td>
                 </form> 

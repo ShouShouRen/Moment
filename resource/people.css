@@ -5,12 +5,12 @@
     margin-top: 3.5rem;
 }
 input[type="email"] {
-    background-color: #525251;
+    background-color: var(--color-background);
     outline-style: none ;
-    /* border: 1px solid #ccc;  */
+    border: 3px solid #76c902d3; 
     border-radius: 3px;
     padding: 12px 13px;
-    width: 95%;
+    width: 65%;
     font-size: 15px;
     font-weight: 700;
     font-family: "Microsoft soft";
