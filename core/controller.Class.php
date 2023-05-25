@@ -143,7 +143,7 @@ class Controller{
         $info = $checkUser->fetch(PDO::FETCH_ASSOC);
         if(isset($info["email"]) && $info["email"] == $data["email"]){
             $session = $this->generateCode(20);
-            $inserUser = $this->db -> prepare("UPDATE users SET f_name=':f_name',l_name=':l_name',avatar=':avatar' WHERE email=':email'");
+            $inserUser = $this->db -> prepare("UPDATE users SET f_name=:f_name,l_name=:l_name,avatar=:avatar WHERE email=:email");
             $inserUser->execute([
                 ':f_name' => $data["familyName"],
                 ':l_name' => $data["givenName"],
