@@ -113,7 +113,7 @@ class Controller{
         $checkUser->execute(['email'=> $data]);
         $info = $checkUser->fetch(PDO::FETCH_ASSOC);
         if(isset($info["email"]) && $info["email"] == $data){
-            header('Location: index.php');
+            header('Location: /Merge/page/people.php');
         }
         else{
             $session = $this->generateCode(20);
@@ -130,11 +130,32 @@ class Controller{
                 setcookie("id",$this->db->lastInsertId(),time()+60*60*24*30,"/","moment.duacodie.com");
                 setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");
                 $_SESSION['id'] = $this->db->lastInsertId();
-                header('Location: index.php');
+                header('Location: /Merge/page/people.php');
                 exit();
             }
             else{
                 return "Error inserting user!";
+            }
+        }
+    }
+
+    function updateData($data){
+        $checkUser = $this->db->prepare("SELECT * FROM users WHERE email=:email");
+        $checkUser->execute(['email'=> $data["email"]]);
+        $info = $checkUser->fetch(PDO::FETCH_ASSOC);
+        if(isset($info["email"]) && $info["email"] == $data){
+            $session = $this->generateCode(20);
+            $inserUser = $this->db -> prepare("UPDATE users SET f_name=?,l_name=?,avatar=? WHERE email=?");
+            $inserUser->execute([$data["familyName"],$data["givenName"],$data["avatar"],$data["email"]]);
+            if($inserUser){
+                setcookie("id",$this->db->lastInsertId(),time()+60*60*24*30,"/","moment.duacodie.com");
+                setcookie("sss",$session,time()+60*60*24*30,"/","moment.duacodie.com");
+                $_SESSION['id'] = $this->db->lastInsertId();
+                header('Location: /Merge/page/people.php');
+                exit();
+            }
+            else{
+                return "Error Update user!";
             }
         }
     }

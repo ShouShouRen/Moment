@@ -34,9 +34,15 @@ if(isset($token["error"])!="invalid_grant"){
     }
     
     // $ret = $stmt->fetch(PDO::FETCH_ASSOC);
-    // insert data
+    // 檢查使用者是否可以登入
     $Controller = new Controller($user,$passwd);
     echo $Controller->LoginPremission(array(
+        'email' => $userData['email'],
+        'avatar' => $userData['picture'],
+        'familyName' => $userData['familyName'],
+        'givenName' => $userData['givenName'] 
+    ));
+    echo $Controller->updateData(array(
         'email' => $userData['email'],
         'avatar' => $userData['picture'],
         'familyName' => $userData['familyName'],
