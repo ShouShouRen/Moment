@@ -10,7 +10,7 @@
 		<form class="d-flex" method="post" action="people.php" style="margin-top: 50px;">
 			<div class="position-relative">
 				<input type="email" name="user_add" class="form-control me-3" id="user_add_input">
-				<label class="position-absolute" for="user_add_input">姓名</label>
+				<label class="position-absolute" for="user_add_input">電子郵件</label>
 			</div>
 			<input class="btn btn-danger" type="submit" name="submit" value="添加" placeholder="輸入管理員email">
 		</form>
@@ -18,21 +18,21 @@
 	</div>
 	<script>
 		const input = document.getElementById('user_add_input');
-const label = input.nextElementSibling;
-input.addEventListener('focus', () => {
-label.classList.add('focused');
-});
-input.addEventListener('blur', () => {
-if (input.value === '') {
-label.classList.remove('focused');
-}
-});
-input.addEventListener('input', () => {
-if (input.value !== '') {
-label.classList.add('has-value');
-} else {
-label.classList.remove('has-value');
-}
-});
+		const label = input.nextElementSibling;
+		input.addEventListener('focus', () => {
+			label.classList.add('focused');
+		});
+		input.addEventListener('blur', () => {
+			if (input.value === '') {
+				label.classList.remove('focused');
+			}
+		});
+		input.addEventListener('input', () => {
+			if (input.value !== '') {
+				label.classList.add('has-value');
+			} else {
+				label.classList.remove('has-value');
+			}
+		});
 	</script>
 {% endblock %}
