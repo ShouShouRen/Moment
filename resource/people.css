@@ -1,23 +1,65 @@
-.user_tab{
-    color: var(--color-dark-variant);
+.user_tab {
+  color: var(--color-dark-variant);
 }
-.table{
-    margin-top: 3.5rem;
+.table {
+  margin-top: 3.5rem;
 }
 input[type="email"] {
-    background-color: var(--color-background);
-    outline-style: none ;
-    border: 3px solid #76c902d3; 
-    border-radius: 3px;
-    padding: 12px 13px;
-    width: 65%;
-    font-size: 15px;
-    font-weight: 700;
-    font-family: "Microsoft soft";
+  background-color: var(--color-background);
+  outline-style: none;
+  border: 3px solid #76c902d3;
+  border-radius: 3px;
+  padding: 12px 13px;
+  width: 40vw;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: "Microsoft soft";
 }
-input[type="email"]:focus{
-    border-color: #66afe9;
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+input[type="email"]:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+    0 0 8px rgba(102, 175, 233, 0.6);
+}
+.focused,
+.has-value {
+  transform: translateY(-45%);
+  top: 0;
+  background: #a3bdcc;
+  padding: 4px;
+  display: inline-block;
+  border-radius: 8%;
+}
+.container-grid {
+  display: grid;
+  width: 96%;
+  margin: 0 auto;
+  gap: 1.8rem;
+  grid-template-columns: 14rem auto 0;
+}
+@media (max-width: 992px) {
+  .container-grid {
+    display: grid;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 1fr;
+  }
+  input[type="email"] {
+    width: 65vw;
+  }
+}
+.right {
+  margin-top: 1.4rem;
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+label {
+  top: 50%;
+  left: 4%;
+  transform: translateY(-50%);
+  transition: 0.5s;
 }

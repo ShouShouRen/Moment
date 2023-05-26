@@ -1,24 +1,38 @@
 {% extends 'base.twig' %}
 {% block head %}
-  <link rel="stylesheet" href="{{ session.Resource_PATH }}people.css">
-  <style>
-    .container-grid{
-        display: grid;
-        width: 96%;
-        margin: 0 auto;
-        gap: 1.8rem;
-        grid-template-columns: 14rem auto 0rem;
-    }
-    .right{
-      margin-top: 1.4rem;
-      position: absolute;
-      right: 5px;
-    }
-  </style>
+	<link rel="stylesheet" href="{{ session.Resource_PATH }}people.css">
 {% endblock %}
 {% block title %}
-管理帳號
+	管理帳號
 {% endblock %}
 {% block main %}
-{{user_table | raw}}
+	<div class="container">
+		<form class="d-flex" method="post" action="people.php" style="margin-top: 50px;">
+			<div class="position-relative">
+				<input type="email" name="user_add" class="form-control me-3" id="user_add_input">
+				<label class="position-absolute" for="user_add_input">姓名</label>
+			</div>
+			<input class="btn btn-danger" type="submit" name="submit" value="添加" placeholder="輸入管理員email">
+		</form>
+		{{user_table | raw}}
+	</div>
+	<script>
+		const input = document.getElementById('user_add_input');
+const label = input.nextElementSibling;
+input.addEventListener('focus', () => {
+label.classList.add('focused');
+});
+input.addEventListener('blur', () => {
+if (input.value === '') {
+label.classList.remove('focused');
+}
+});
+input.addEventListener('input', () => {
+if (input.value !== '') {
+label.classList.add('has-value');
+} else {
+label.classList.remove('has-value');
+}
+});
+	</script>
 {% endblock %}

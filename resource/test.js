@@ -63,6 +63,7 @@ if (isDarkTheme === "true") {
   themeToggler.children("span").eq(0).addClass("active");
   themeToggler.children("span").eq(1).removeClass("active");
 } else {
+  body.removeClass(themeClass); 
   themeToggler.children("span").eq(0).removeClass("active");
   themeToggler.children("span").eq(1).addClass("active");
 }

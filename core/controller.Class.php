@@ -72,20 +72,20 @@ class Controller{
                 </tr>
             ';
         }
-        $content .= '
-            <td></td>
-            <td></td> 
-            <td></td>
-            <td align="center" >
-                <form method="post" action="people.php">
-                    <input type="email" name="user_add" class="form-control">
-                    <td align="center" >
-                        <input class="btn btn-danger" type="submit" name="submit" value="添加" placeholder="輸入管理員email">
-                    </td>
-                </form> 
-            </td>
-            </tbody></table>
-            ';
+        // $content .= '
+        //     <td></td>
+        //     <td></td> 
+        //     <td></td>
+        //     <td align="center" >
+        //         <form method="post" action="people.php">
+        //             <input type="email" name="user_add" class="form-control">
+        //             <td align="center" >
+        //                 <input class="btn btn-danger" type="submit" name="submit" value="添加" placeholder="輸入管理員email">
+        //             </td>
+        //         </form> 
+        //     </td>
+        //     </tbody></table>
+        //     ';
         return $content;
     }
     //Init data
