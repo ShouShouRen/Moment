@@ -17,7 +17,7 @@ Base(function($user,$passwd) use ($url){
             die($result);
         }
     }
-    if(isset($_POST["user_add"])){
+    if(isset($_POST["user_add"]) && $_POST["user_add"] != ""){
         $result = $controller->insertData($_POST["user_add"]);
     }
     $url['user_table'] = $controller->printData(); 

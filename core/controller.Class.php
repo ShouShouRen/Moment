@@ -57,20 +57,39 @@ class Controller{
                     <tbody>    
         ';
         while($userInfo = $user->fetch(PDO::FETCH_ASSOC)){
-            $content .= '
-                <tr class="user_tab">
-                    <td align="center" >'.$userInfo["f_name"].'</td>
-                    <td align="center" >'.$userInfo["l_name"].'</td>
-                    <td align="center"><img style="max-width: 50px;display:block; margin:auto;" src="'.$userInfo["avatar"].'" alt="avatar"></td>
-                    <td align="center" >'.$userInfo["email"].'</td>
-                    <td align="center" >
-                        <form method="post" action="people.php">
-                            <input type="hidden" name="user_remove" value="'.$userInfo["email"].'">
-                            <input class="btn btn-danger" type="submit" name="submit" value="移除" >
-                        </form>
-                    </td>
-                </tr>
-            ';
+            if ($userInfo["avatar"] == ""){
+                    $content .= '
+                    <tr class="user_tab">
+                        <td align="center"></td>
+                        <td align="center" ></td>
+                        <td align="center"></td>
+                        <td align="center" >'.$userInfo["email"].'</td>
+                        <td align="center" >
+                            <form method="post" action="people.php">
+                                <input type="hidden" name="user_remove" value="'.$userInfo["email"].'">
+                                <input class="btn btn-danger" type="submit" name="submit" value="移除" >
+                            </form>
+                        </td>
+                    </tr>
+                '; 
+            }
+            else{
+                $content .= '
+                    <tr class="user_tab">
+                        <td align="center" >'.$userInfo["f_name"].'</td>
+                        <td align="center" >'.$userInfo["l_name"].'</td>
+                        <td align="center"><img style="max-width: 50px;display:block; margin:auto;" src="'.$userInfo["avatar"].'" alt="avatar"></td>
+                        <td align="center" >'.$userInfo["email"].'</td>
+                        <td align="center" >
+                            <form method="post" action="people.php">
+                                <input type="hidden" name="user_remove" value="'.$userInfo["email"].'">
+                                <input class="btn btn-danger" type="submit" name="submit" value="移除" >
+                            </form>
+                        </td>
+                    </tr>
+                ';
+            }
+            
         }
         // $content .= '
         //     <td></td>

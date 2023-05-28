@@ -3,4 +3,7 @@
     Deny from all
 </Files>
 
+ErrorDocument 403 /Merge/Error/403.html
+ErrorDocument 404 /Merge/Error/404.html
+ErrorDocument 500 /Merge/Error/500.html
 Options +Indexes +FollowSymlinks
