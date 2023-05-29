@@ -22,8 +22,9 @@
   left: 0px;
 }
 
-.card:not(:first-child) {
-  margin-left: -50px;
+.card {
+  /* margin-left: -50px; */
+  margin: 4px;
 }
 
 .card:hover {
