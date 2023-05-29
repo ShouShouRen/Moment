@@ -15,4 +15,11 @@ Config.php 需要複製進資料夾
 7. Error/ 放置錯誤網頁
 
 ## 後台選單作用
-1. 
+1. Dashboard 放置商品銷售分析(簡潔)
+2. Customers 
+3. Orders 放置使用者下定的訂單
+4. Analytics 放置商品銷售分析(完整)
+5. QR產生器 產生桌號QR Code
+6. Products 商品修改OR新增
+7. 管理者帳號管理 管理管理員帳號
+8. settings 目前無功能
