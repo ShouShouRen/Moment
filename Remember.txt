@@ -11,7 +11,8 @@
     10. Template_PATH 指向templates資料夾
     11. Logout 指向logout.php
     
-    
+一天過去之後需要使用系統排程清空資料表
+
 
 網站搬家時：
 修改：
