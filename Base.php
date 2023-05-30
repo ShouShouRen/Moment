@@ -31,6 +31,11 @@ function Base(callable $fn){
             header('location:'.Web_Root_Path."index.php");
         }
     } else {
+        if(isset($_POST["token"])){
+            if (basename($_SERVER["REQUEST_URI"]) == "orders.php"){
+                echo "Success";
+            }
+        }
         header('location:'.Web_Root_Path."index.php");
         die();
     }
