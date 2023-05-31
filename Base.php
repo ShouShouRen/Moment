@@ -32,9 +32,10 @@ function Base(callable $fn){
         }
     } else {
         if(isset($_POST["token"])){
-            if (basename($_SERVER["REQUEST_URI"]) == "orders.php"){
-                echo "Success";
+            if (basename($_SERVER['PHP_SELF']) == "orders.php"){
+                return $fn($insert=false);
             }
+            
         }
         header('location:'.Web_Root_Path."index.php");
         die();
