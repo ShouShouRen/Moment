@@ -49,7 +49,7 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
             $decoder_code = base64_decode($sec["base64"]);
             $arr = explode(" ",$decoder_code);
             $_SESSION['time'] = $arr[1];
-            $_SESSION['new_time'] = date('H:i:s', strtotime($_SESSION['time'].'+1 minutes')); // 加上 15 分鐘
+            $_SESSION['new_time'] = date('H:i:s', strtotime($_SESSION['time'].'+15 minutes')); // 加上 15 分鐘
             $now = date("H:i:s");
             if(($now > $_SESSION['new_time']) OR ($now < $_SESSION['time'])){
                 $sql = "DELETE FROM `Guests` WHERE token = ?";
@@ -116,8 +116,7 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                 </div>
             </div>
         </div>
-        <form action="orders.php" method="post">
-            <input type=hidden name="token" value="${token}">
+        <form action="page/test.php" method="post">
             <div class="modal fade" id="cart" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
@@ -151,12 +150,21 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                         </div>
                         <div class="modal-footer d-flex justify-content-between align-items-center">
                             <p class="fw-bold">共<span class="text-primary mx-1">{{ cartItems.length }}</span>筆項目</p>
-                            <p class="fw-bold">總共:<span class="text-primary mx-1">${{ getTotalPrice() }}</span>元</p><button
-                                type="button" @click="checkout" class="btn btn-primary text-white shadow-none">去買單</button>
+                            <p class="fw-bold">
+                                總共:
+                                <span class="text-primary mx-1">${{ getTotalPrice() }}</span>
+                                元
+                            </p>
+                            <button type="submit" class="btn btn-primary text-white shadow-none">去買單</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- 放置傳到後端的值 -->
+            <input type="hidden" name="getTotalPrice" :value="getTotalPrice()">
+            <input type="hidden" name="date" value="<?= $now ?>">
+            <input type="hidden" name="desk" value="<?= $arr[2] ?>">
+            <input type=hidden name="token" value="<?= $data ?>">
         </form>
     </div>
 </body>
