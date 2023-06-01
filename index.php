@@ -163,7 +163,7 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
             <!-- 放置傳到後端的值 -->
             <input type="hidden" name="getTotalPrice" :value="getTotalPrice()">
             <input type="hidden" name="date" value="<?= $now ?>">
-            <input type="hidden" name="desk" value="<?= $arr[2] ?>">
+            <input type="hidden" name="desk" value="<?= $arr[3] ?>">
             <input type=hidden name="token" value="<?= $data ?>">
         </form>
     </div>
