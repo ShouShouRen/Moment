@@ -12,7 +12,13 @@
     // echo $_POST["token"];
     // echo $_POST
     var_dump($_POST);
-    echo($_POST["desk"]);
+    // echo($_POST["desk"]);
+    foreach ($_POST['product_name'] as $index => $productName) {
+      echo $productName;
+    }
+    foreach($_POST["product_count"] as $idx => $productCount){
+      echo $productCount;
+    }
   }else{
     die("error");
   }

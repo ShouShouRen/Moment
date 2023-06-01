@@ -145,6 +145,14 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                                                 d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
                                             </path>
                                         </svg></a>
+                                        <!-- 放置傳到後端的值 -->
+                                        <!-- <input type="hidden" name="product_name" :value="item.title"> -->
+                                        <input type="hidden" :name="'product_name[' + index + ']'" :value="item.title">
+                                        <input type="hidden" name="getTotalPrice" :value="getTotalPrice()">
+                                        <input type="hidden" name="date" value="<?= $now ?>">
+                                        <input type="hidden" name="desk" value="<?= $arr[3] ?>">
+                                        <input type="hidden" :name="'product_count[' + index + ']'" :value="item.amount">
+                                        <input type=hidden name="token" value="<?= $data ?>">
                                 </div>
                             </div>
                         </div>
@@ -160,11 +168,6 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                     </div>
                 </div>
             </div>
-            <!-- 放置傳到後端的值 -->
-            <input type="hidden" name="getTotalPrice" :value="getTotalPrice()">
-            <input type="hidden" name="date" value="<?= $now ?>">
-            <input type="hidden" name="desk" value="<?= $arr[3] ?>">
-            <input type=hidden name="token" value="<?= $data ?>">
         </form>
     </div>
 </body>
