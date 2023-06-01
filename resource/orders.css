@@ -17,9 +17,9 @@
 
   transition: 0.2s linear;
 
-  position: relative;
+  /* position: relative;
 
-  left: 0px;
+  left: 0px; */
 }
 
 .card {
@@ -48,12 +48,7 @@
 
     transform: none;
   }
-  .card:hover ~ .card {
-    position: relative;
-
-    left: 0px;
-  }
-  .card:not(:first-child) {
+  .card{
     margin: 10px;
   }
   .title {

@@ -116,45 +116,48 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="cart" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title d-flex align-items-center">購物車</h5><button type="button"
-                            class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body p-0">
-                        <div class="p-3" v-if="cartItems.length === 0">
-                            <p class="text-center">您的購物車是空的。</p>
+        <form action="orders.php" method="post">
+            <input type=hidden name="token" value="${token}">
+            <div class="modal fade" id="cart" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title d-flex align-items-center">購物車</h5><button type="button"
+                                class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="list-group list-group-flush fz-18" v-else>
-                            <div class="list-group-item d-flex justify-content-between align-items-center"
-                                v-for="(item, index) in cartItems" :key="index">
-                                <div class="d-flex justify-content-around align-items-center w-75">
-                                    <p class="mb-0">{{ item.title }}</p><small class="text-secondary">{{ item.price
-                                                        }}元</small>
-                                    <div class="d-flex"><button type="button" class="btn btn-primary btn-sm"
-                                            @click="minus(item)">-</button> <input class="form-control w-50 text-center"
-                                            min="1" max="9" v-model.number="item.amount" /> <button type="button"
-                                            class="btn btn-primary btn-sm" @click="plus(item)">+</button></div>
-                                </div><a href="javascript:;"><svg @click="removeFromCart(index)"
-                                        xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#d0021c"
-                                        class="bi bi-trash-fill ms-2" viewBox="0 0 26 26">
-                                        <path
-                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
-                                        </path>
-                                    </svg></a>
+                        <div class="modal-body p-0">
+                            <div class="p-3" v-if="cartItems.length === 0">
+                                <p class="text-center">您的購物車是空的。</p>
+                            </div>
+                            <div class="list-group list-group-flush fz-18" v-else>
+                                <div class="list-group-item d-flex justify-content-between align-items-center"
+                                    v-for="(item, index) in cartItems" :key="index">
+                                    <div class="d-flex justify-content-around align-items-center w-75">
+                                        <p class="mb-0">{{ item.title }}</p><small class="text-secondary">{{ item.price
+                                                            }}元</small>
+                                        <div class="d-flex"><button type="button" class="btn btn-primary btn-sm"
+                                                @click="minus(item)">-</button> <input class="form-control w-50 text-center"
+                                                min="1" max="9" v-model.number="item.amount" /> <button type="button"
+                                                class="btn btn-primary btn-sm" @click="plus(item)">+</button></div>
+                                    </div><a href="javascript:;"><svg @click="removeFromCart(index)"
+                                            xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#d0021c"
+                                            class="bi bi-trash-fill ms-2" viewBox="0 0 26 26">
+                                            <path
+                                                d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z">
+                                            </path>
+                                        </svg></a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-between align-items-center">
-                        <p class="fw-bold">共<span class="text-primary mx-1">{{ cartItems.length }}</span>筆項目</p>
-                        <p class="fw-bold">總共:<span class="text-primary mx-1">${{ getTotalPrice() }}</span>元</p><button
-                            type="button" class="btn btn-primary text-white shadow-none">去買單</button>
+                        <div class="modal-footer d-flex justify-content-between align-items-center">
+                            <p class="fw-bold">共<span class="text-primary mx-1">{{ cartItems.length }}</span>筆項目</p>
+                            <p class="fw-bold">總共:<span class="text-primary mx-1">${{ getTotalPrice() }}</span>元</p><button
+                                type="button" @click="checkout" class="btn btn-primary text-white shadow-none">去買單</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 <script src="https://unpkg.com/vue@3"></script>
