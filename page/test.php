@@ -11,7 +11,7 @@
     // echo $_POST["getTotalPrice"];
     // echo $_POST["token"];
     // echo $_POST
-    var_dump($_POST);
+    // var_dump($_POST);
     // echo($_POST["desk"]);
     foreach ($_POST['product_name'] as $index => $productName) {
       echo $productName;
