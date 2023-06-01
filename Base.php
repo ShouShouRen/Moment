@@ -31,9 +31,9 @@ function Base(callable $fn){
             header('location:'.Web_Root_Path."index.php");
         }
     } else {
-        if(isset($_POST["token"])){
+        if(isset($_GET["token"])){
             if (basename($_SERVER['PHP_SELF']) == "orders.php"){
-                return $fn($insert=false);
+                return $fn($user,$passwd,$data=$_GET["token"],$insert=false);
             }
             
         }

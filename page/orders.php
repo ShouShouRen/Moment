@@ -9,7 +9,7 @@ require_once($_SESSION["Base"]);
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 $url = $URLS;
-Base(function($insert=true) use ($url){
+Base(function($user,$passwd,$data,$insert=true) use ($url){
     if($insert){
         $loader = new FilesystemLoader(ROOT_PATH.'/templates');
         $twig = new Environment($loader);
@@ -19,7 +19,15 @@ Base(function($insert=true) use ($url){
         }
     }
     else{
-        die("SUCCESS"); 
+        if(!isset($data)) die("NO Data");
+        $db = new Connect($user,$passwd);
+        $sql = "SELECT * FROM `Guests` WHERE `token`=:token;";
+        $ret = $db->prepare($sql);
+        $ret->execute([
+            ':token' => $data
+        ]);
+        $callBack = $ret -> fetch(PDO::FETCH_ASSOC);
+        if(isset($callBack["token"])) die($data);
     }
     
 });
