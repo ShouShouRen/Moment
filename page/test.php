@@ -14,10 +14,10 @@
     // var_dump($_POST);
     // echo($_POST["desk"]);
     foreach ($_POST['product_name'] as $index => $productName) {
-      echo $productName;
+      echo $index."  ".$productName."\n";
     }
     foreach($_POST["product_count"] as $idx => $productCount){
-      echo $productCount;
+      echo $index."  ".$productCount."\n";
     }
   }else{
     die("error");

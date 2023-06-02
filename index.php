@@ -24,41 +24,49 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
     $db = new Connect($user,$passwd);
 
     if(isset($_GET["token"])){
-        $sql = "SELECT * FROM `Guests`";
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
-        $count = $stmt->rowCount();
-        if($count==0){
-            $sql = "ALTER TABLE `Guests` AUTO_INCREMENT = 0;";
+
+        $secret=['MjAyMy0wNi0wMiAxNDo1MTo0OCA2IEE0','$2y$10$rptGIlBzE3gpd0A7kdNyLu6gTWEEIt6UmY/WLMctwVyNjRTKLgT3m'];
+        if($_GET["token"] != $secret[1]){ //驗證
+            $sql = "SELECT * FROM `Guests`";
             $stmt = $db->prepare($sql);
             $stmt->execute();
-        } 
+            $count = $stmt->rowCount();
+            if($count==0){
+                $sql = "ALTER TABLE `Guests` AUTO_INCREMENT = 0;";
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+            } 
 
-        $data = $_GET["token"];
-        $sql = "SELECT token,base64 FROM Guests WHERE token = ?";
-        $stmt = $db->prepare($sql);
-        $stmt->execute([$data]);
-        $count = $stmt->rowCount();
-        if($count==0){
-            header("Location: index.php");
-            die();
-        }
-
-        $sec = $stmt->fetch(PDO::FETCH_ASSOC);
-        if(password_verify($sec["base64"],$data)){
+            $data = $_GET["token"];
+            $sql = "SELECT token,base64 FROM Guests WHERE token = ?";
+            $stmt = $db->prepare($sql);
+            $stmt->execute([$data]);
+            $count = $stmt->rowCount();
+            if($count==0){
+                header("Location: index.php");
+                die();
+            }
+            $sec = $stmt->fetch(PDO::FETCH_ASSOC);
+        } //驗證
+        $Pbase = $sec["base64"]??$secret[0];
+        $Ptoken = $data ?? $secret[1];
+        if(password_verify($Pbase,$Ptoken)){
             $decoder_code = base64_decode($sec["base64"]);
             $arr = explode(" ",$decoder_code);
             $_SESSION['time'] = $arr[1];
             $_SESSION['new_time'] = date('H:i:s', strtotime($_SESSION['time'].'+15 minutes')); // 加上 15 分鐘
             $now = date("H:i:s");
-            if(($now > $_SESSION['new_time']) OR ($now < $_SESSION['time'])){
-                $sql = "DELETE FROM `Guests` WHERE token = ?";
-                $stmt = $db->prepare($sql);
-                $stmt->execute([$data]);
-                header("Location: index.php");
-                die();
+            //永久token驗證
+            if($data != $secret[1]){
+                if(($now > $_SESSION['new_time']) OR ($now < $_SESSION['time'])){
+                    $sql = "DELETE FROM `Guests` WHERE token = ?";
+                    $stmt = $db->prepare($sql);
+                    $stmt->execute([$data]);
+                    header("Location: index.php");
+                    die();
+                }
             }
-            ?>
+?>
 <!doctype html>
 <html lang="en">
 
@@ -184,7 +192,7 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
         }
     }
     else{
-        ?>
+?>
 
 <head>
     <meta charset="UTF-8" />
