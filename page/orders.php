@@ -18,6 +18,7 @@ Base(function($user,$passwd,$data=null,$insert=true) use ($url){
             echo $twig->render('orders.twig',$url);
         }
     }
+    // $sql = 'SELECT Guests.token, orders.desk,orders.product_name,orders.product_count,orders.totalPrice FROM Guests NATURAL JOIN orders WHERE Guests.token = "$2y$10$rptGIlBzE3gpd0A7kdNyLu6gTWEEIt6UmY/WLMctwVyNjRTKLgT3m";';
     else{
         if(!isset($data)) die("NO Data");
         $db = new Connect($user,$passwd);
@@ -29,9 +30,19 @@ Base(function($user,$passwd,$data=null,$insert=true) use ($url){
         $callBack = $ret -> fetch(PDO::FETCH_ASSOC);
         if(isset($callBack["token"])){
             if(isset($_POST['product_name'])) { 
-                foreach ($_POST['product_name'] as $index => $productName) {
-                    echo $index."  ".$productName."<br>";
+                $db = new Connect($user,$passwd);
+                $amerge = array_combine($_POST['product_name'],$_POST['product_count']);
+                foreach ($amerge as $key => $val) {
+                    $stmt = $db -> prepare("INSERT INTO `orders` (desk,token,product_name,product_count,totalPrice) VALUES(:desk,:token,:product_name,:product_count,:totalPrice)");
+                    $stmt->execute([
+                        ':desk' => $_POST["desk"],
+                        ":token" => $_POST["token"],
+                        ':product_name' => $key,
+                        ':product_count' => $val,
+                        ':totalPrice' => $_POST["getTotalPrice"] 
+                    ]);
                 }
+                
             }
             else{
                 die('err');
