@@ -7,6 +7,27 @@ class Connect extends PDO{
         $this->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         $this->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
     }
+    public function convert(array $callBack) {
+        $finalArray = [];
+        foreach ($callBack as $row) {
+            $token = $row['token'];
+            $desk = $row['desk'];
+            $productName = $row['product_name'];
+            $productCount = $row['product_count'];
+            $totalPrice = $row['totalPrice'];
+      
+            if (!array_key_exists($desk, $finalArray)) {
+                $finalArray[$desk] = [
+                    'token' => $token,
+                    'product' => [$productName => $productCount],
+                    'totalprice' => $totalPrice
+                ];
+            } else {
+                $finalArray[$desk]["product"][$productName] = $productCount;
+            }
+        }
+        return $finalArray;
+      }
 }
 class Controller{
     private $db;
@@ -191,6 +212,7 @@ class Controller{
         }
         return true;
     }
+    
 }
 
 ?>
