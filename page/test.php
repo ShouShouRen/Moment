@@ -5,9 +5,27 @@ class Connect extends PDO{
       $this->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
       $this->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
   }
-//   public function convert(object &$out,array $a){
-// 	$out->$a["desk"]
-//   }
+  function convert(array $callBack) {
+    $finalArray = [];
+    foreach ($callBack as $row) {
+        $token = $row['token'];
+        $desk = $row['desk'];
+        $productName = $row['product_name'];
+        $productCount = $row['product_count'];
+        $totalPrice = $row['totalPrice'];
+  
+        if (!array_key_exists($desk, $finalArray)) {
+            $finalArray[$desk] = [
+                'token' => $token,
+                'product' => [$productName => $productCount],
+                'totalprice' => $totalPrice
+            ];
+        } else {
+            $finalArray[$desk]["product"][$productName] = $productCount;
+        }
+    }
+    return $finalArray;
+  }
 }
 $db = new Connect('derrick','Ed0911872587-');
 $sql = 'SELECT `Guests`.`token`, `orders`.`desk`,`orders`.`product_name`,`orders`.`product_count`,`orders`.`totalPrice` FROM `Guests` NATURAL JOIN `orders` WHERE `Guests`.`token` = "$2y$10$rptGIlBzE3gpd0A7kdNyLu6gTWEEIt6UmY/WLMctwVyNjRTKLgT3m";';
@@ -15,6 +33,9 @@ $stmt = $db->prepare($sql);
 $stmt->execute();
 $callBack = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
+
+
+var_dump($db->convert($callBack));
 
 // foreach($callBack as $key => $val){
   
@@ -25,16 +46,16 @@ $callBack = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
 // $result = array_merge_recursive($array1, $array2);
 // print_r($result['key1'][0]);
-$oVal = (object)[
-	'key1' => (object)[
-	  'var1' => "something",
-	  'var2' => "something else",
-	],
-  ];
-  $name = (object) [
-	'first' => ['test','test2'],
-	'last'  => 'Jie',
-  ];
-  $name->first = 'gg';
-var_dump($name);  
+// $oVal = (object)[
+// 	'key1' => (object)[
+// 	  'var1' => "something",
+// 	  'var2' => "something else",
+// 	],
+//   ];
+//   $name = (object) [
+// 	'first' => ['test','test2'],
+// 	'last'  => 'Jie',
+//   ];
+//   $name->first = 'gg';
+// var_dump($name);   
 ?>
