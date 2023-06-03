@@ -124,7 +124,7 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                 </div>
             </div>
         </div>
-        <form action="page/test.php" method="post">
+        <form action="page/orders.php" method="post">
             <div class="modal fade" id="cart" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
@@ -160,7 +160,7 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                                         <input type="hidden" name="date" value="<?= $now ?>">
                                         <input type="hidden" name="desk" value="<?= $arr[3] ?>">
                                         <input type="hidden" :name="'product_count[' + index + ']'" :value="item.amount">
-                                        <input type=hidden name="token" value="<?= $data ?>">
+                                        <input type="hidden" name="token" value="<?= $_GET["token"]; ?>">
                                 </div>
                             </div>
                         </div>
@@ -176,6 +176,7 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                     </div>
                 </div>
             </div>
+            <??>
         </form>
     </div>
 </body>

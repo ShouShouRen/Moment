@@ -36,7 +36,6 @@ function Base(callable $fn){
             if (basename($_SERVER['PHP_SELF']) == "orders.php"){
                 return $fn($user,$passwd,$data=$token,$insert=false);
             }
-            
         }
         header('location:'.Web_Root_Path."index.php");
         die();

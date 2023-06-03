@@ -9,7 +9,7 @@ require_once($_SESSION["Base"]);
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 $url = $URLS;
-Base(function($user,$passwd,$data,$insert=true) use ($url){
+Base(function($user,$passwd,$data=null,$insert=true) use ($url){
     if($insert){
         $loader = new FilesystemLoader(ROOT_PATH.'/templates');
         $twig = new Environment($loader);
@@ -27,8 +27,16 @@ Base(function($user,$passwd,$data,$insert=true) use ($url){
             ':token' => $data
         ]);
         $callBack = $ret -> fetch(PDO::FETCH_ASSOC);
-        if(isset($callBack["token"])) die($data);
+        if(isset($callBack["token"])){
+            if(isset($_POST['product_name'])) { 
+                foreach ($_POST['product_name'] as $index => $productName) {
+                    echo $index."  ".$productName."<br>";
+                }
+            }
+            else{
+                die('err');
+            }
+        }
     }
-    
 });
 ?>
