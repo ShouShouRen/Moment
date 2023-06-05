@@ -16,7 +16,7 @@ Config.php 需要複製進資料夾
 
 ## 後台選單作用
 1. Dashboard 放置商品銷售分析(簡潔)
-2. Customers 
+2. Customers 顯示目前顧客資訊
 3. Orders 放置使用者下定的訂單
 4. Analytics 放置商品銷售分析(完整)
 5. QR產生器 產生桌號QR Code
