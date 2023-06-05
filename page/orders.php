@@ -10,7 +10,7 @@ use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 $url = $URLS;
 Base(function($user,$passwd,$order_DONE=null,$data=null,$insert=true) use ($url){
-    if($insert){
+    if($insert===true){
         $db = new Connect($user,$passwd);
         if(isset($order_DONE)){
             $sql = "DELETE FROM `Guests` WHERE token = ?";
@@ -22,8 +22,6 @@ Base(function($user,$passwd,$order_DONE=null,$data=null,$insert=true) use ($url)
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $callBack = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-        // var_dump($callBack);
-        // die();
         $url["order"] = $db->convert($callBack);
         $loader = new FilesystemLoader(ROOT_PATH.'/templates');
         $twig = new Environment($loader);
@@ -33,7 +31,10 @@ Base(function($user,$passwd,$order_DONE=null,$data=null,$insert=true) use ($url)
         }
     }
     else{
-        if(!isset($data)) die("NO Data");
+        if(!isset($data)) {
+            header("Location: /index.php");
+            die();
+        }
         $db = new Connect($user,$passwd);
         $sql = "SELECT * FROM `Guests` WHERE `token`=:token;";
         $ret = $db->prepare($sql);
@@ -55,7 +56,11 @@ Base(function($user,$passwd,$order_DONE=null,$data=null,$insert=true) use ($url)
                         ':totalPrice' => $_POST["getTotalPrice"] 
                     ]);
                 }
-                
+                echo '<script language="javascript">
+                        var URL = "https://moment.duacodie.com/Merge/page/";
+                        window.location.replace(URL+"success.php?token='.$_POST["token"].'");
+                    </script>
+                ';
             }
             else{
                 die('err');

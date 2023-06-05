@@ -28,7 +28,7 @@ function Base(callable $fn){
         }
         if ($Controller->checkUserStatus($_COOKIE["id"], $_COOKIE["sss"])) {
             if(isset($_POST["DONE"])){
-                return $fn($user,$passwd,$order_DONE=$_POST["DONE"]);
+                return $fn($user,$passwd,order_DONE:$_POST["DONE"]);
             }
                 return $fn($user,$passwd);
         } else {
@@ -38,10 +38,10 @@ function Base(callable $fn){
         if(isset($_GET["token"]) || isset($_POST["token"])){
             $token = $_POST["token"] ?? $_GET["token"];
             if (basename($_SERVER['PHP_SELF']) == "orders.php"){
-                return $fn($user,$passwd,$data=$token,$insert=false);
+                return $fn($user,$passwd,data:$token,insert: false);
             }
             if (basename($_SERVER['PHP_SELF']) == "success.php"){
-                return $fn($user,$passwd,$data=$token,$insert=false);
+                return $fn($user,$passwd,data:$token);
             }
         }
         header('location:'.Web_Root_Path."index.php");

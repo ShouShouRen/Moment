@@ -1,4 +1,16 @@
-{% extends 'base.twig' %}
-{% block title %}
-  Success
-{% endblock %}
+<html>
+  <head>
+    <title>Success</title>
+  </head>
+  <body>
+    <ul>
+      {% for desk,obj in order %}
+        {% for name,count in obj.product %}
+          <li> {{name}}: {{count}}個</li>
+        {% endfor %}
+      {% endfor %}
+    </ul> 
+  </body>
+</html>
+
+
