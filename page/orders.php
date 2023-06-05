@@ -12,11 +12,14 @@ $url = $URLS;
 Base(function($user,$passwd,$data=null,$insert=true) use ($url){
     if($insert){
         $db = new Connect($user,$passwd);
-        $sql = 'SELECT `Guests`.`token`, `orders`.`desk`,`orders`.`product_name`,`orders`.`product_count`,`orders`.`totalPrice` FROM `Guests` NATURAL JOIN `orders` WHERE `Guests`.`token` = "$2y$10$rptGIlBzE3gpd0A7kdNyLu6gTWEEIt6UmY/WLMctwVyNjRTKLgT3m";';
+        $sql = 'SELECT `Guests`.`token`, `orders`.`desk`,`orders`.`product_name`,`orders`.`product_count`,`orders`.`totalPrice` FROM `Guests` NATURAL JOIN `orders`';
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $callBack = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+ 
         $url["order"] = $db->convert($callBack);
+        // var_dump($url["order"]);
+        // die();
         $loader = new FilesystemLoader(ROOT_PATH.'/templates');
         $twig = new Environment($loader);
         if (basename($_SERVER["REQUEST_URI"]) == basename(__FILE__)){

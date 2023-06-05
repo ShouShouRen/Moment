@@ -46,7 +46,6 @@ if (isset($_COOKIE["id"]) && isset($_COOKIE["sss"]) && isset($_SESSION['ucode'])
                 die();
             }
             $sec = $stmt->fetch(PDO::FETCH_ASSOC);
-            var_dump($sec);
         } //驗證
         $Pbase = $sec["base64"]??$secret[0];
         $Ptoken = $data ?? $secret[1];
