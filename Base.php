@@ -12,7 +12,8 @@ $URLS = array(
     "customers" => $_SESSION["Route-customers"],
     "orders" => $_SESSION["Route-orders"],
     "qr" => $_SESSION["Route-qr"],
-    "people"=> $_SESSION["Route-people"],
+    "people" => $_SESSION["Route-people"],
+    "success" => $_SESSION["Route-success"], 
     //End
 );
 
