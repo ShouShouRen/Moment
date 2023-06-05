@@ -3,12 +3,20 @@
 {% block head %}
 	<link rel="stylesheet" href="{{ session.Resource_PATH }}orders.css">
 	<style>
+		body {
+			overflow: hidden;
+		}
 		.container-grid {
 			display: grid;
 			width: 96%;
 			margin: 0 auto;
 			gap: 1.8rem;
 			grid-template-columns: 14rem auto 0;
+		}
+		.bouncing {
+			font-size: 4em;
+			color: #444;
+			position: absolute;
 		}
 		@media(max-width: 992px) {
 			.container-grid {
@@ -63,14 +71,54 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 							<form action="orders.php">
-								<button type="submit" class="btn btn-primary" name="DONE">已完成</button>
+								<button type="submit" class="btn btn-primary" name="DONE" value="{{ obj.token }}">已完成</button>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		{% else %}
-			<p style="font-size: 4em; color: #444;">沒有定單</p>
+			<section class="position-relative">
+				<p class="bouncing">沒有定單</p>
+			</section>
 		{% endfor %}
 	</div>
 {% endblock %}
+<script>
+const section = document.querySelector("section");
+const logo = document.querySelector(".bouncing");
+const FPS = 60;
+section.style.height = window.innerHeight + "px";
+section.style.width = window.innerWidth + "px";
+
+let xPosition = 10;
+let yPosition = 10;
+let xSpeed = 4;
+let ySpeed = 4;
+function update() {
+  logo.style.left = xPosition + "px";
+  logo.style.top = yPosition + "px";
+}
+
+setInterval(() => {
+  if (xPosition + logo.clientWidth >= window.innerWidth || xPosition <= 0) {
+    xSpeed = -xSpeed;
+  }
+  if (yPosition + logo.clientHeight >= window.innerHeight || yPosition <= 0) {
+    ySpeed = -ySpeed;
+  }
+
+  xPosition += xSpeed;
+  yPosition += ySpeed;
+  update();
+}, 1000 / FPS);
+
+window.addEventListener("resize", () => {
+  xPosition = 10;
+  yPosition = 10;
+
+  section.style.height = window.innerHeight + "px";
+  section.style.width = window.innerWidth + "px";
+});
+
+</script>
