@@ -34,6 +34,9 @@ function Base(callable $fn){
         if(isset($_GET["token"]) || isset($_POST["token"])){
             $token = $_POST["token"] ?? $_GET["token"];
             if (basename($_SERVER['PHP_SELF']) == "orders.php"){
+                if(isset($_POST["DONE"])){
+                    return $fn($user,$passwd,$order_DONE=$_POST["DONE"],$insert=false);
+                }
                 return $fn($user,$passwd,$data=$token,$insert=false);
             }
         }

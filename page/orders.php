@@ -9,9 +9,15 @@ require_once($_SESSION["Base"]);
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 $url = $URLS;
-Base(function($user,$passwd,$data=null,$insert=true) use ($url){
+Base(function($user,$passwd,$order_DONE=null,$data=null,$insert=true) use ($url){
     if($insert){
         $db = new Connect($user,$passwd);
+        if(isset($order_DONE)){
+            $sql = "DELETE FROM `Guests` WHERE token = ?";
+            $stmt = $db->prepare($sql);
+            $ret = $stmt->execute([$order_DONE]);
+            if(!$ret) die("刪除錯誤");
+        }
         $sql = 'SELECT `Guests`.`token`, `orders`.`desk`,`orders`.`product_name`,`orders`.`product_count`,`orders`.`totalPrice` FROM `Guests` NATURAL JOIN `orders`';
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -26,7 +32,6 @@ Base(function($user,$passwd,$data=null,$insert=true) use ($url){
             echo $twig->render('orders.twig',$url);
         }
     }
-    // $sql = 'SELECT Guests.token, orders.desk,orders.product_name,orders.product_count,orders.totalPrice FROM Guests NATURAL JOIN orders WHERE Guests.token = "$2y$10$rptGIlBzE3gpd0A7kdNyLu6gTWEEIt6UmY/WLMctwVyNjRTKLgT3m";';
     else{
         if(!isset($data)) die("NO Data");
         $db = new Connect($user,$passwd);
