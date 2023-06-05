@@ -16,10 +16,9 @@ Base(function($user,$passwd,$data=null,$insert=true) use ($url){
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $callBack = $stmt -> fetchAll(PDO::FETCH_ASSOC);
- 
-        $url["order"] = $db->convert($callBack);
-        // var_dump($url["order"]);
+        // var_dump($callBack);
         // die();
+        $url["order"] = $db->convert($callBack);
         $loader = new FilesystemLoader(ROOT_PATH.'/templates');
         $twig = new Environment($loader);
         if (basename($_SERVER["REQUEST_URI"]) == basename(__FILE__)){
