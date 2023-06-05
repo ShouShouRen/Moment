@@ -14,9 +14,10 @@
 			grid-template-columns: 14rem auto 0;
 		}
 		.bouncing {
-			font-size: 4em;
+			font-size: 3.8em;
 			color: #444;
 			position: absolute;
+			width: 200px;
 		}
 		@media(max-width: 992px) {
 			.container-grid {
@@ -78,17 +79,18 @@
 				</div>
 			</div>
 		{% else %}
-			<section class="position-relative">
+			{# <section class="position-relative"> #}
 				<p class="bouncing">沒有定單</p>
-			</section>
+			{# </section> #}
 		{% endfor %}
 	</div>
 	<script>
 const section = document.querySelector("section");
+const container = document.querySelector(".container");
 const logo = document.querySelector(".bouncing");
 const FPS = 60;
-section.style.height = window.innerHeight + "px";
-section.style.width = window.innerWidth + "px";
+{# section.style.height = window.innerHeight + "px";
+section.style.width = window.innerWidth + "px"; #}
 
 let xPosition = 10;
 let yPosition = 10;
