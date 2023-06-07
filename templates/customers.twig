@@ -1,5 +1,14 @@
 {% extends 'base.twig' %}
 
+{% block head %}
+	<link rel="stylesheet" href="{{ session.Resource_PATH }}customers.css">
+{% endblock %}
+
 {% block title %}
 Customers
+{% endblock %}
+
+{% block main %}
+    <script>console.log({{ _context | json_encode | raw }});</script>
+    {{result|raw}} 
 {% endblock %}

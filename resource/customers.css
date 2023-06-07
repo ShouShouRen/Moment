@@ -1,0 +1,24 @@
+.user_tab {
+    color: var(--color-dark-variant);
+  }
+  .table {
+    margin-top: 3.5rem;
+  }
+  .container-grid {
+    display: grid;
+    width: 96%;
+    margin: 0 auto;
+    gap: 1.8rem;
+    grid-template-columns: 14rem auto 0;
+  }
+  @media (max-width: 992px) {
+    .container-grid {
+      display: grid;
+      width: 96%;
+      margin: 0 auto;
+      gap: 1.8rem;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  
