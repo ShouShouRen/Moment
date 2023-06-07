@@ -363,6 +363,9 @@ main table tbody td{
 /* ========= Right ========= */
 .right{
     margin-top: 1.4rem;
+    position: absolute;
+    top: 0;
+    right: 5px;
 }
 
 .right .top{

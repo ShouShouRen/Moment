@@ -14,7 +14,7 @@ function printData($user,$passwd){
     $user = $db->prepare("SELECT *  FROM `Guests`");
     $user->execute();
     $content = '
-            <table class="table">
+            <table class="table" style="margin-top: 80px">
                 <thead class="table-dark">
                     <tr align="center" >
                         <th scope="col" align="center" >id</th>
