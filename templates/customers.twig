@@ -38,13 +38,13 @@
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
-			{% for i in 0..total_pages-1 %}
-				<li class="page-item {% if i+1 == page %}active{% endif %}">
-					<a class="page-link" href="?page={{ i+1 }}">{{ i+1 }}</a>
+			{% for i in 1..total_pages %}
+				<li class="page-item {% if i == page %}active{% endif %}">
+					<a class="page-link" href="?page={{ i }}">{{ i }}</a>
 				</li>
 			{% endfor %}
 			<li class="page-item {% if page == total_pages %}disabled{% endif %}">
-				<a class="page-link" href="?page={{ page + 1 }}" aria-label="Next">
+				<a class="page-link" href="?page={{ page }}" aria-label="Next">
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 			</li>
