@@ -12,14 +12,7 @@ $url = $URLS;
 function printData($user,$passwd,&$url){
     $db = new Connect($user,$passwd);
     $limit = 10;
-    var_dump($_GET["page"]);
-    die();
-    if(isset($_GET["page"])){
-        $_GET["page"] = 1;
-    }else{
-        die('err');
-    } 
-    intval($_GET["page"]) < 0 ? $page = 1 : $page = intval($_GET["page"]);
+    $page = intval($_GET["page"] ?? "1");
     $url["page"] = $page;
     if($page == 0) $start = ($page) * $limit;
     else $start = ($page - 1) * $limit;
