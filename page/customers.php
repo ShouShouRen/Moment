@@ -9,17 +9,18 @@ require_once($_SESSION["Base"]);
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 $url = $URLS;
-function printData($user,$passwd){
+function printData($user,$passwd,&$url){
     $db = new Connect($user,$passwd);
     $limit = 10;
-    $page = isset($_GET["page"]) ? $_GET["page"] : 1;
-    $start = ($page - 1) * $limit;
+    $page = intval($_GET["page"]) ?? 1;
+    $url["page"] = $page;
+    if($page == 0) $start = ($page) * $limit;
+    else $start = ($page - 1) * $limit;
     $user = $db->prepare("SELECT * FROM `Guests` LIMIT $start, $limit");
-    $total = $db->query("SELECT COUNT(*) FROM `Guests`")->fetchColumn();
-    $total_pages = intval(ceil($total / $limit));
     $user->execute();
-    // var_dump($total_pages);
-    // die();
+    $total = $db->query("SELECT * FROM `Guests`")->rowCount();
+    $total_pages = intval(ceil($total / $limit));
+    $url["total_pages"] = $total_pages;
     $content = '
             <table class="table" style="margin-top: 80px">
                 <thead class="table-dark">
@@ -54,22 +55,10 @@ function printData($user,$passwd){
     return $content;
 }
 Base(function($user,$passwd) use ($url){
-    $url["result"] = printData($user,$passwd);
-    // $db = new Connect($user,$passwd);
-    // $sql = "SELECT *  FROM `Guests`";
-    // $stmt = $db->prepare($sql);
-    // $stmt->execute();
-    // $count = $stmt->rowCount();
-    // if($count==0){
-    //     $url["result"] = $count;
-    // }
-    // else{
-    //     $callback = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     $url["result"] = $callback;
-    // }
+    $url["result"] = printData($user,$passwd,$url);
     $loader = new FilesystemLoader(ROOT_PATH.'/templates');
     $twig = new Environment($loader);
-    if (basename($_SERVER["REQUEST_URI"]) == basename(__FILE__)){
+    if (basename($_SERVER["PHP_SELF"]) == basename(__FILE__)){
         $url["customers_active"] = "active";
         echo $twig->render('customers.twig',$url);
     }
