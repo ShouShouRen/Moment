@@ -8,6 +8,15 @@
 			top: 0;
 			right: 5px;
 		}
+		.page-link {
+			background: var(--color-background);
+		}
+		.page-item.active .page-link {
+			background: var(--color-dark-variant);
+		}
+		.page-item.disabled .page-link {
+			background: var(--color-background);
+		}
 	</style>
 {% endblock %}
 
@@ -29,12 +38,11 @@
 					<span aria-hidden="true">&laquo;</span>
 				</a>
 			</li>
-{% for i in 0..total_pages-1 %}
-    <li class="page-item {% if i+1 == page %}active{% endif %}">
-        <a class="page-link" href="?page={{ i+1 }}">{{ i+1 }}</a>
-    </li>
-{% endfor %}
-
+			{% for i in 0..total_pages-1 %}
+				<li class="page-item {% if i+1 == page %}active{% endif %}">
+					<a class="page-link" href="?page={{ i+1 }}">{{ i+1 }}</a>
+				</li>
+			{% endfor %}
 			<li class="page-item {% if page == total_pages %}disabled{% endif %}">
 				<a class="page-link" href="?page={{ page + 1 }}" aria-label="Next">
 					<span aria-hidden="true">&raquo;</span>
