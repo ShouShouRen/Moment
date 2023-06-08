@@ -11,8 +11,15 @@ use Twig\Loader\FilesystemLoader;
 $url = $URLS;
 function printData($user,$passwd){
     $db = new Connect($user,$passwd);
-    $user = $db->prepare("SELECT *  FROM `Guests`");
+    $limit = 10;
+    $page = isset($_GET["page"]) ? $_GET["page"] : 1;
+    $start = ($page - 1) * $limit;
+    $user = $db->prepare("SELECT * FROM `Guests` LIMIT $start, $limit");
+    $total = $db->query("SELECT COUNT(*) FROM `Guests`")->fetchColumn();
+    $total_pages = intval(ceil($total / $limit));
     $user->execute();
+    // var_dump($total_pages);
+    // die();
     $content = '
             <table class="table" style="margin-top: 80px">
                 <thead class="table-dark">
