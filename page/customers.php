@@ -12,7 +12,14 @@ $url = $URLS;
 function printData($user,$passwd,&$url){
     $db = new Connect($user,$passwd);
     $limit = 10;
-    $page = intval($_GET["page"]) ?? 1;
+    var_dump($_GET["page"]);
+    die();
+    if(isset($_GET["page"])){
+        $_GET["page"] = 1;
+    }else{
+        die('err');
+    } 
+    intval($_GET["page"]) < 0 ? $page = 1 : $page = intval($_GET["page"]);
     $url["page"] = $page;
     if($page == 0) $start = ($page) * $limit;
     else $start = ($page - 1) * $limit;
@@ -40,8 +47,8 @@ function printData($user,$passwd,&$url){
                 <td align="center" >'.$userInfo["token"].'</td>
                 <td align="center" >'.$userInfo["base64"].'</td>
                 <td align="center" >
-                    <form method="post" action="people.php">
-                        <input type="hidden" name="user_remove" value="'.$userInfo["id"].'">
+                    <form method="post" action="customers.php?page='.$page.'">
+                        <input type="hidden" name="customers_remove" value="'.$userInfo["id"].'">
                         <input class="btn btn-danger" type="submit" name="submit" value="移除" >
                     </form>
                 </td>
@@ -55,6 +62,13 @@ function printData($user,$passwd,&$url){
     return $content;
 }
 Base(function($user,$passwd) use ($url){
+    if(isset($_POST["customers_remove"])){
+        $controller = new Controller($user,$passwd);
+        $result = $controller->deleteData("guest",$_POST["customers_remove"]);
+        if(!$result){
+            die($result);
+        }
+    }
     $url["result"] = printData($user,$passwd,$url);
     $loader = new FilesystemLoader(ROOT_PATH.'/templates');
     $twig = new Environment($loader);

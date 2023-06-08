@@ -202,17 +202,23 @@ class Controller{
         }
     }
 
-    function deleteData($data){
+    function deleteData($mode,$data){
         try{
-            $checkUser = $this->db->prepare("DELETE FROM users WHERE email=:email");
-            $checkUser->execute(['email'=> $data]);
+            if(isset($mode) && $mode == "user") {
+                $checkUser = $this->db->prepare("DELETE FROM users WHERE email=:email");
+                $checkUser->execute(['email'=> $data]);
+            }
+            else if(isset($mode) && $mode == "guest"){
+                $checkUser = $this->db->prepare("DELETE FROM Guests WHERE id=:id");
+                $checkUser->execute(['id'=> $data]);
+            }
         }
         catch (PDOException $e) {
            return $e;
         }
         return true;
     }
-    
+
 }
 
 ?>
