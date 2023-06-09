@@ -27,7 +27,8 @@ function printProduct($user,$passwd,&$url){
     <table class="table" style="margin-top: 80px">
         <thead class="table-dark">
             <tr align="center" >
-                <th scope="col" align="center" >id</th>
+                <th scope="col" align="center" >check</th>
+                <th scope="col" align="center" ><input type="checkbox" class="form-check-input h3"></th>
                 <th scope="col" align="center" >title</th>
                 <th scope="col" align="center" >price</th>
                 <th scope="col" align="center" >image</th>
@@ -36,8 +37,9 @@ function printProduct($user,$passwd,&$url){
         <tbody>';
     while($productInfo = $product->fetch(PDO::FETCH_ASSOC)){
     $content .= '
-        <tr class="user_tab">
+        <tr class="product_tab">
             <td align="center" >'.$productInfo["id"].'</td>
+            <td align="center" ><input type="checkbox" class="form-check-input h3" name="select" value='.$productInfo["id"].'></td>"
             <td align="center" >'.$productInfo["title"].'</td>
             <td align="center" >'.$productInfo["price"].'</td>
             <td align="center" >'.$productInfo["image"].'</td>
@@ -58,6 +60,7 @@ function printProduct($user,$passwd,&$url){
 Base(function($user,$passwd) use ($url){
     $loader = new FilesystemLoader(ROOT_PATH.'/templates');
     $twig = new Environment($loader);
+    
     $url["result"] = printProduct($user,$passwd,$url);
     if (basename($_SERVER["PHP_SELF"]) == basename(__FILE__)){
         $url["product_active"] = "active";

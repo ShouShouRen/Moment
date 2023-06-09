@@ -1,53 +1,93 @@
 {% extends 'base.twig' %}
 {% block head %}
-<style>
-  .container-grid {
-    display: grid;
-    width: 96%;
-    margin: 0 auto;
-    gap: 1.8rem;
-    grid-template-columns: 14rem auto 0;
-  }
-	.right {
+	<style>
+		.product_tab {
+			color: var(--color-dark-variant);
+		}
+		.container-grid {
+			display: grid;
+			width: 96%;
+			margin: 0 auto;
+			gap: 1.8rem;
+			grid-template-columns: 14rem auto 0;
+		}
+		.right {
 			position: absolute;
 			top: 0;
 			right: 5px;
-	}
-  @media (max-width: 992px) {
-    .container-grid {
-      display: grid;
-      width: 96%;
-      margin: 0 auto;
-      gap: 1.8rem;
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+		}
+		.page-link {
+			background: var(--color-background);
+		}
+		.page-item.active .page-link {
+			background: var(--color-dark-variant);
+		}
+		.page-item.disabled .page-link {
+			background: var(--color-background);
+		}
+		@media(max-width: 992px) {
+			.container-grid {
+				display: grid;
+				width: 96%;
+				margin: 0 auto;
+				gap: 1.8rem;
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
 {% endblock %}
 {% block title %}
 	商品管理
 {% endblock %}
 {% block main %}
-<div class="container">
-  {{result|raw}}
-  	<nav aria-label="Page navigation example">
-		<ul class="pagination justify-content-end">
-			<li class="page-item {% if page == 1 %}disabled{% endif %}">
-				<a class="page-link" href="?page={{ page - 1 }}" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-				</a>
-			</li>
-			{% for i in 1..total_pages %}
-				<li class="page-item {% if i == page %}active{% endif %}">
-					<a class="page-link" href="?page={{ i }}">{{ i }}</a>
+	<div class="container">
+		{{result|raw}}
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-end">
+				<li class="page-item {% if page == 1 %}disabled{% endif %}">
+					<a class="page-link" href="?page={{ page - 1 }}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
 				</li>
-			{% endfor %}
-			<li class="page-item {% if page == total_pages %}disabled{% endif %}">
-				<a class="page-link" href="?page={{ page + 1 }}" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-</div>
+				{% for i in 1..total_pages %}
+					<li class="page-item {% if i == page %}active{% endif %}">
+						<a class="page-link" href="?page={{ i }}">{{ i }}</a>
+					</li>
+				{% endfor %}
+				<li class="page-item {% if page == total_pages %}disabled{% endif %}">
+					<a class="page-link" href="?page={{ page + 1 }}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+  <script>
+  {# $('.form-check-input.h3').on('change',function(){
+    if($(this).is(':checked')){
+      $('input[name="select"]').prop('checked',true);
+    }else{
+      $('input[name="select"]').prop('checked',false);
+    }
+  }) #}
+
+    {# $(document).ready(function() {
+      var url = 'product.php';
+      var data = {
+        data1: $("select").val(),
+      };
+
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: data,
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(xhr, status, error) {
+          console.log('Error:', error);
+        }
+      });
+    }); #}
+  </script>
 {% endblock %}
