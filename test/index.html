@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>POST Request Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+  <script>
+    $(document).ready(function() {
+      var url = 'your_php_script.php';
+      var data = {
+        data1: 'value1',
+        data2: 'value2'
+      };
+
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: data,
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(xhr, status, error) {
+          console.log('Error:', error);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
