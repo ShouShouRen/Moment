@@ -14,6 +14,7 @@ $URLS = array(
     "qr" => $_SESSION["Route-qr"],
     "people" => $_SESSION["Route-people"],
     "success" => $_SESSION["Route-success"], 
+    "product" => $_SESSION["Route-product"], 
     //End
 );
 
