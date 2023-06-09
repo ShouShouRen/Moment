@@ -41,8 +41,9 @@
 {% endblock %}
 {% block main %}
 	<div class="container">
+		<button id="send">送出</button>
 		{{result|raw}}
-		{# <nav aria-label="Page navigation example">
+		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-end">
 				<li class="page-item {% if page == 1 %}disabled{% endif %}">
 					<a class="page-link" href="?page={{ page - 1 }}" aria-label="Previous">
@@ -60,34 +61,36 @@
 					</a>
 				</li>
 			</ul>
-		</nav> #}
+		</nav>
 	</div>
-  {# <script> #}
-  {# $('.form-check-input.h3').on('change',function(){
-    if($(this).is(':checked')){
-      $('input[name="select"]').prop('checked',true);
-    }else{
-      $('input[name="select"]').prop('checked',false);
-    }
-  }) #}
+  	<script>
+  		$('.form-check-input.h3').on('change',function(){
+    		if($(this).is(':checked')){
+      			$('input[name="select"]').prop('checked',true);
+    		}else{
+      			$('input[name="select"]').prop('checked',false);
+    		}
+  		})
 
-    {# $(document).ready(function() {
-      var url = 'product.php';
-      var data = {
-        data1: $("select").val(),
-      };
+    	$('.send').on('cliked',function() {
+			var checkbox = $('input[type="checkbox"]');
+  			var name = checkbox.attr('name');
+      		var url = 'value.php';
+      		var data = {
+        		data1: name,
+      		};
 
-      $.ajax({
-        url: url,
-        type: 'POST',
-        data: data,
-        success: function(response) {
-          console.log(response);
-        },
-        error: function(xhr, status, error) {
-          console.log('Error:', error);
-        }
-      });
-    }); #}
-  {# </script> #}
+			$.ajax({
+				url: url,
+				type: 'POST',
+				data: data,
+				success: function(response) {
+				console.log(response);
+				},
+				error: function(xhr, status, error) {
+				console.log('Error:', error);
+				}
+			});
+    	});
+  	</script>
 {% endblock %}

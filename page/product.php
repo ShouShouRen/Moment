@@ -39,7 +39,7 @@ function printProduct($user,$passwd,&$url){
     $content .= '
         <tr class="product_tab">
             <td align="center" >'.$productInfo["id"].'</td>
-            <td align="center" ><input type="checkbox" class="form-check-input h3" name="select" value="'.$productInfo["id"].'"></td>
+            <td align="center" ><input type="checkbox" class="form-check-input h3" name="select" value='.$productInfo["id"].'></td>
             <td align="center" >'.$productInfo["title"].'</td>
             <td align="center" >'.$productInfo["price"].'</td>
             <td align="center" >'.$productInfo["image"].'</td>
@@ -55,8 +55,6 @@ function printProduct($user,$passwd,&$url){
     $content .= '
     </tbody></table>
     ';
-    // var_dump($content);
-    // die();
     return $content;
 }
 Base(function($user,$passwd) use ($url){
