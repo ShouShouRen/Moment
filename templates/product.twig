@@ -41,43 +41,47 @@
 {% endblock %}
 {% block main %}
 	<div class="container">
-		<button id="send">送出</button>
+		<button id="send" class="btn btn-danger">移除</button>
 		{{result|raw}}
 		<nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-end">
+				{% if total_pages > 0 %}
 				<li class="page-item {% if page == 1 %}disabled{% endif %}">
 					<a class="page-link" href="?page={{ page - 1 }}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
-				{% for i in 1..total_pages %}
+					{% for i in 1..total_pages %}
 					<li class="page-item {% if i == page %}active{% endif %}">
 						<a class="page-link" href="?page={{ i }}">{{ i }}</a>
 					</li>
-				{% endfor %}
+					{% endfor %}
 				<li class="page-item {% if page == total_pages %}disabled{% endif %}">
 					<a class="page-link" href="?page={{ page + 1 }}" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>
+				{% endif %}
 			</ul>
 		</nav>
 	</div>
   	<script>
-  		$('.form-check-input.h3').on('change',function(){
-    		if($(this).is(':checked')){
-      			$('input[name="select"]').prop('checked',true);
-    		}else{
-      			$('input[name="select"]').prop('checked',false);
-    		}
-  		})
 
-    	$('.send').on('cliked',function() {
-			var checkbox = $('input[type="checkbox"]');
-  			var name = checkbox.attr('name');
-      		var url = 'value.php';
+  		function toggle(source) {
+			var checkboxes = document.querySelectorAll('input[name="select"]');
+			checkboxes.forEach(function(checkbox) {
+				checkbox.checked = source.checked;
+			});
+		}
+
+    	$('#send').click(function() {
+			var whichOne = [];
+    		$.each($("input[name='select']:checked"), function(){
+      			whichOne.push($(this).val());
+    		});
+      		var url = 'product.php';
       		var data = {
-        		data1: name,
+        		data1: whichOne,
       		};
 
 			$.ajax({
@@ -85,10 +89,10 @@
 				type: 'POST',
 				data: data,
 				success: function(response) {
-				console.log(response);
+					window.location.reload();
 				},
 				error: function(xhr, status, error) {
-				console.log('Error:', error);
+					window.location.reload();
 				}
 			});
     	});

@@ -205,11 +205,15 @@ class Controller{
     function deleteData($mode,$data){
         try{
             if(isset($mode) && $mode == "user") {
-                $checkUser = $this->db->prepare("DELETE FROM users WHERE email=:email");
+                $checkUser = $this->db->prepare("DELETE FROM `users` WHERE email=:email");
                 $checkUser->execute(['email'=> $data]);
             }
             else if(isset($mode) && $mode == "guest"){
-                $checkUser = $this->db->prepare("DELETE FROM Guests WHERE id=:id");
+                $checkUser = $this->db->prepare("DELETE FROM `Guests` WHERE id=:id");
+                $checkUser->execute(['id'=> $data]);
+            }
+            else if(isset($mode) && $mode == "menu"){
+                $checkUser = $this->db->prepare("DELETE FROM `Menu` WHERE id=:id");
                 $checkUser->execute(['id'=> $data]);
             }
         }
