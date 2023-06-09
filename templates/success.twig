@@ -1,6 +1,9 @@
-{% extends 'base.twig' %}
-{% block head %}
+<!DOCTYPE html>
+<body>
+<title>Success</title>
+<head>
 	<style>
+		@import("../resource/bootstrap.min.css");
 		* {
 			padding: 0;
 			margin: 0;
@@ -167,30 +170,35 @@
 			}
 		}
 	</style>
-{% endblock %}
-{% block title %}
-	Success
-{% endblock %}
-<title>Success</title>
-<div class="center">
-	<div class="text-center">
-		<h2 class="pb-3">桌號：Ａ1</h2>
-		<div class="success-checkmark">
-			<div class="check-icon">
-				<span class="icon-line line-tip"></span>
-				<span class="icon-line line-long"></span>
-				<div class="icon-circle"></div>
-				<div class="icon-fix"></div>
+</head>
+<body>
+	<div class="center">
+		<div class="text-center">
+			<h2 class="pb-3">桌號：Ａ1</h2>
+			<div class="success-checkmark">
+				<div class="check-icon">
+					<span class="icon-line line-tip"></span>
+					<span class="icon-line line-long"></span>
+					<div class="icon-circle"></div>
+					<div class="icon-fix"></div>
+				</div>
 			</div>
-		</div>
-		<ul>
-			{% for desk,obj in order %}
-				{% for name,count in obj.product %}
-					<li>
-						{{name}}:
-						{{count}}個</li>
+			<ul>
+				{% for desk,obj in order %}
+					{% for name,count in obj.product %}
+						<li>
+							{{name}}:
+							{{count}}個</li>
+					{% endfor %}
 				{% endfor %}
-			{% endfor %}
-		</ul>
+			</ul>
+		</div>
 	</div>
-</div>
+</body>
+<script language="javascript">
+	var URL = "https://moment.duacodie.com/Merge";
+	setTimeout(function(){
+		window.location.replace(URL);
+	},5000)
+</script>
+</html>
